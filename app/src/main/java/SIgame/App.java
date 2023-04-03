@@ -3,12 +3,17 @@
  */
 package SIgame;
 
-public class App {
+import SIgame.view.*;
+//import SIgame.model.*;
+import SIgame.controller.*;
 
+public class App 
+{
     
-    }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static void main(String[] args) 
+    { 
+        Score score = new Score();
+        GameController controller = new GameController(score);
     }
 }
