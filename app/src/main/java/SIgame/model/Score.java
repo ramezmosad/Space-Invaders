@@ -1,4 +1,4 @@
-package SIgame.view;
+package SIgame.model;
 
 public class Score {
     

@@ -1,7 +1,9 @@
 package SIgame.controller;
 
 import SIgame.view.*;
+import SIgame.model.*;
 import SIgame.*;
+
 
 public class GameController implements ControllerInterface{
     
@@ -10,8 +12,8 @@ public class GameController implements ControllerInterface{
 
     public GameController(Score score)
     {
-        this.score = score;
-        this.gui = new SpaceGUI(this,score);
+        this.score = new Score();
+        this.gui = new SpaceGUI(this, score);
     }
 
 }
