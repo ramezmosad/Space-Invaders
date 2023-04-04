@@ -7,6 +7,9 @@ import SIgame.model.*;
 
 import java.awt.*;
 import SIgame.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.*;
+import javax.imageio.ImageIO;
 
 public class SpaceGUI
 {
@@ -38,33 +41,38 @@ public class SpaceGUI
 
     public void drawMainMenu()
     {
-        imageDrawing("/SIgame/resources/logo.png", titleScreen, 1);
-        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //imageDrawing("/SIgame/resources/logo.png", titleScreen, 1);
 
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("alien.png"));
+        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel image = new JLabel(icon);
         titleScreen.setPreferredSize(new Dimension(640, 480));
         titleScreen.setBackground(Color.BLACK);
         titleScreen.setLayout(new BoxLayout(titleScreen, BoxLayout.PAGE_AXIS));
 
-        menuFrame.add(titleScreen);
+        //Graphics.drawImage(image,100,100);
+        menuFrame.add(image);
+        //menuFrame.add(titleScreen);
         menuFrame.pack();
         menuFrame.setVisible(true);
     }
 
     public void drawGameScreen(String difficulty)
     {
-        JLabel label = new JLabel("GAME");
-        label.setOpaque(true);
-        gameFrame = new JFrame(difficulty);
+        //JLabel label = new JLabel("GAME");
+        //label.setOpaque(true);
+        gameFrame = new JFrame("difficulty");
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         gameScreen.setBackground(Color.BLACK);
         gameScreen.setPreferredSize(new Dimension(640, 480));
         gameScreen.setLayout(new BoxLayout(gameScreen, BoxLayout.PAGE_AXIS));
 
-        imageDrawing("/SIgame/view/alien.png", gameScreen, 0.5);
+        ImageIcon test2 = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
+        JLabel gameScreen = new JLabel(test2);
         
         gameFrame.add(gameScreen);
-        gameFrame.add(label);
+        //gameFrame.add(label);
         gameFrame.pack();
         gameFrame.setVisible(true);
     }
