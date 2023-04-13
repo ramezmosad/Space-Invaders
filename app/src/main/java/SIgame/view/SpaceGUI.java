@@ -66,9 +66,8 @@ public class SpaceGUI
     //     menuFrame.setVisible(true);
     // } 
 
-    
-
-    public void drawGameScreen(String difficulty) {
+    public void drawGameScreen(String difficulty) 
+    {
         int alienStartX = 50;
         gameFrame = new JFrame(difficulty);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,9 +84,9 @@ public class SpaceGUI
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setBounds(120, 10, 100, 30);
         gameScreen.add(highScoreLabel);
-        JLabel livesLabel = new JLabel("Lives: 2");
-        livesLabel.setForeground(Color.WHITE);
-        livesLabel.setBounds(250, 10, 80, 30);
+        // JLabel livesLabel = new JLabel("Lives: 2");
+        // livesLabel.setForeground(Color.WHITE);
+        // livesLabel.setBounds(250, 10, 80, 30);
         gameScreen.add(livesLabel);
         // ImageIcon tankIcon = new ImageIcon(getClass().getClassLoader().getResource("tank.png"));
         // Image scaledTank = tankIcon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
