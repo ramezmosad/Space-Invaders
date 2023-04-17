@@ -18,12 +18,14 @@ public class TankView extends JLabel
         scaledTank = tankIcon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
         tankIcon = new ImageIcon(scaledTank);
         tankLabel = new JLabel(tankIcon);
+        setIcon(tankIcon);
+        
+
         
         //addKeyListener(new TankController(new TankModel(290, 420, 5), this));
-        //setFocusable(true);
-        tankLabel.setBounds(290, 420, 60, 60);
-        add(tankLabel);
-       
+        setFocusable(true);
+        this.add(tankLabel);
+        this.setBounds(290, 420, 60, 60);
     }  
 
 }

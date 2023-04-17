@@ -98,10 +98,9 @@ public class SpaceGUI
         // JLabel tankLabel = new JLabel(tankIcon);
         // tankLabel.setBounds(290, 420, 60, 60);
         //this.tankView = tankView;
-
-        TankView test = tankView;
-
-        gameScreen.add(this.tankView);
+        TankView test = new TankView();
+        test.setBounds(290, 420, 60, 60);
+        gameScreen.add(test);
              
         // for (int i = 0; i < 6; i++) 
         // {
@@ -118,7 +117,6 @@ public class SpaceGUI
 
 
 
-    
         gameFrame.add(gameScreen);
         gameFrame.pack();
         gameFrame.setVisible(true);
