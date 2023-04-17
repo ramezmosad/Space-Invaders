@@ -12,6 +12,13 @@ public class App
     public static void main(String[] args) 
     { 
         Score score = new Score();
-        GameController controller = new GameController(score);
+        TankModel tankModel = new TankModel(290, 420, 5);
+        TankView tankView = new TankView();
+        TankController tankController = new TankController(tankModel, tankView);
+        tankView.addKeyListener(tankController);
+        
+
+        GameController controller = new GameController(score,tankView);
+        
     }
 }

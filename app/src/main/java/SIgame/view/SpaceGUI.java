@@ -2,9 +2,11 @@ package SIgame.view;
 
 import javax.swing.*;
 import SIgame.model.*;
+import SIgame.view.*;
 
 import java.awt.*;
 import SIgame.*;
+import SIgame.controller.GameController;
 
 public class SpaceGUI
 {
@@ -14,15 +16,17 @@ public class SpaceGUI
     JPanel gameScreen;
     JLabel image;
     ImageIcon icon;
+    TankView tankView;
 
-    ControllerInterface controller;
+    GameControllerInterface controller;
     Score score;
     String difficulty = "Normal"; //hard coded for now
 
-    public SpaceGUI(ControllerInterface controller, Score score)
+    public SpaceGUI(GameControllerInterface gameController, Score score, TankView tankView)
     {   
-        this.controller = controller;
+        this.controller = gameController;
         this.score = score;
+        this.tankView = tankView;
 
         menuFrame = new JFrame("Space Invaders");
         titleScreen = new JPanel();
@@ -30,7 +34,7 @@ public class SpaceGUI
         gameScreen = new JPanel();
 
         //drawMainMenu();
-        drawGameScreen(difficulty);
+        drawGameScreen(difficulty,this.tankView);
     }
 
     // public void drawMainMenu() {
@@ -66,7 +70,7 @@ public class SpaceGUI
     //     menuFrame.setVisible(true);
     // } 
 
-    public void drawGameScreen(String difficulty) 
+    public void drawGameScreen(String difficulty,TankView tankVieww) 
     {
         int alienStartX = 50;
         gameFrame = new JFrame(difficulty);
@@ -87,13 +91,17 @@ public class SpaceGUI
         // JLabel livesLabel = new JLabel("Lives: 2");
         // livesLabel.setForeground(Color.WHITE);
         // livesLabel.setBounds(250, 10, 80, 30);
-        gameScreen.add(livesLabel);
+        //gameScreen.add(livesLabel);
         // ImageIcon tankIcon = new ImageIcon(getClass().getClassLoader().getResource("tank.png"));
         // Image scaledTank = tankIcon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
         // tankIcon = new ImageIcon(scaledTank);
         // JLabel tankLabel = new JLabel(tankIcon);
         // tankLabel.setBounds(290, 420, 60, 60);
-        gameScreen.add(tankLabel);
+        //this.tankView = tankView;
+
+        TankView test = tankView;
+
+        gameScreen.add(this.tankView);
              
         // for (int i = 0; i < 6; i++) 
         // {
@@ -104,6 +112,12 @@ public class SpaceGUI
         //     alienLabel.setBounds(alienStartX + (i * 50), 50, 40, 40);
         //     gameScreen.add(alienLabel);
         // }
+
+
+        //TankController tankController = new TankController(tankModel, tankView);
+
+
+
     
         gameFrame.add(gameScreen);
         gameFrame.pack();
