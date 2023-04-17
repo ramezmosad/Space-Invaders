@@ -12,10 +12,10 @@ public class App
     public static void main(String[] args) 
     { 
         Score score = new Score();
-        TankModel tankModel = new TankModel(290, 420, 5);
+        //TankModel tankModel = new TankModel(290, 420, 5);
         TankView tankView = new TankView();
-        TankController tankController = new TankController(tankModel, tankView);
-        tankView.addKeyListener(tankController);
+        //TankController tankController = new TankController(tankModel, tankView);
+        //tankView.addKeyListener(tankController);
         
 
         GameController controller = new GameController(score,tankView);

@@ -22,7 +22,7 @@ public class TankView extends JLabel
         
 
         
-        //addKeyListener(new TankController(new TankModel(290, 420, 5), this));
+        addKeyListener(new TankController(new TankModel(290, 420, 5), this));
         setFocusable(true);
         this.add(tankLabel);
         this.setBounds(290, 420, 60, 60);
