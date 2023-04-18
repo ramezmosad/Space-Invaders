@@ -8,6 +8,7 @@ import java.awt.*;
 import SIgame.*;
 import SIgame.controller.GameController;
 
+
 public class SpaceGUI
 {
     JFrame menuFrame;
