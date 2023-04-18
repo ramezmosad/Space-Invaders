@@ -29,6 +29,11 @@ public class TankModel {
         return speed;
     }
 
+    public void setSpeed(int speed)
+    {
+        this.speed = speed;
+    }
+
     public void moveLeft() {
         x -= speed;
     }

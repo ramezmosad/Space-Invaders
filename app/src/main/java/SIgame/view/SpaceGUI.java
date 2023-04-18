@@ -17,15 +17,18 @@ public class SpaceGUI
     JLabel image;
     ImageIcon icon;
     TankView tankView;
+    AlienView alienView;
 
     GameController controller;
     Score score;
     String difficulty = "Normal"; //hard coded for now
 
-    public SpaceGUI(GameController gameController, Score score, TankView tankView) {
+    public SpaceGUI(GameController gameController, Score score, TankView tankView, AlienView alienView) 
+    {
         this.controller = gameController;
         this.score = score;
         this.tankView = tankView;
+        this.alienView = alienView;
 
         gameFrame = new JFrame("Space Invaders");
         gameScreen = new JPanel();
@@ -125,6 +128,8 @@ public class SpaceGUI
 
         //TankController tankController = new TankController(tankModel, tankView);
 
+        this.alienView.setBounds(alienStartX + (0 * 50), 50, 40, 40);
+        gameScreen.add(this.alienView);
 
         gameScreen.add(tankVieww);
         gameFrame.add(gameScreen);
@@ -132,8 +137,6 @@ public class SpaceGUI
         gameFrame.setVisible(true);
     }
 
-
-    // Add a new method for adding lasers to the game screen:
     public void addLaser(LaserModel laserModel) 
     {
         LaserView laserView = new LaserView(laserModel);
@@ -142,7 +145,4 @@ public class SpaceGUI
         gameScreen.repaint();
     }
     
-
-
-
 }

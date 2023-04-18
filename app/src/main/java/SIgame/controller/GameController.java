@@ -6,7 +6,8 @@ import SIgame.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameController {
+public class GameController 
+{
     
     private Score score;
     private TankView tankView;
@@ -14,18 +15,23 @@ public class GameController {
     private List<LaserModel> laserModels;
     private List<LaserView> laserViews;
     private List<LaserController> laserControllers;
+    private AlienController alienController;
 
     public GameController(Score score) 
     {
+        AlienModel alienModel = new AlienModel(50, 50);
+        AlienView alienView = new AlienView(0);
+        alienController = new AlienController(alienModel, alienView);
         this.score = score;
         this.tankView = new TankView();
-        this.gui = new SpaceGUI(this, score, this.tankView);
+        this.gui = new SpaceGUI(this, score, this.tankView, alienView);
         this.laserModels = new ArrayList<>();
         this.laserViews = new ArrayList<>();
         this.laserControllers = new ArrayList<>();
     }
 
-    public void addLaser(LaserModel laserModel, LaserView laserView) {
+    public void addLaser(LaserModel laserModel, LaserView laserView) 
+    {
         laserModels.add(laserModel);
         laserViews.add(laserView);
         LaserController laserController = new LaserController(laserModel, laserView);
@@ -51,6 +57,17 @@ public class GameController {
                 laserViews.remove(i);
                 laserControllers.remove(i);
                 i--;
+            }
+        }
+    }
+
+    public void checkForCollisions() {
+        for (LaserController laserController : laserControllers) {
+            if (alienController.isCollision(laserController)) 
+            {
+                alienController.removeAlien(gui);
+                System.out.println("it colided");
+                // You can also stop updating the laser here or remove it from the game screen
             }
         }
     }

@@ -12,6 +12,11 @@ public class LaserController {
         this.view = view;
     }
 
+    public LaserModel getLaserModel()
+    {
+        return this.model;
+    }
+
     public void updateView() {
         view.setBounds(model.getX(), model.getY(), LaserView.WIDTH, LaserView.HEIGHT);
         view.repaint();

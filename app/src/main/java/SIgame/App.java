@@ -19,13 +19,11 @@ public class App {
         Thread laserThread = new Thread(() -> {
             while (true) {
                 gameController.moveLasers();
-
-                try 
-                {
+                gameController.checkForCollisions();
+        
+                try {
                     Thread.sleep(10);
-                } 
-                catch (InterruptedException e) 
-                {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }

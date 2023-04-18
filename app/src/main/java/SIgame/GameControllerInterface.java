@@ -1,5 +1,6 @@
 package SIgame;
 
-public interface GameControllerInterface {
+public interface GameControllerInterface 
+{
     
 }

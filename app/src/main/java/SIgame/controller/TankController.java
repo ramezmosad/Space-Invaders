@@ -9,13 +9,16 @@ import SIgame.view.LaserView;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class TankController implements KeyListener, ControllerInterface {
+public class TankController implements KeyListener, ControllerInterface
+{
     private TankModel model;
     private TankView view;
     private GameController gameController;
 
-    public TankController(TankModel model, TankView view, GameController gameController) {
+    public TankController(TankModel model, TankView view, GameController gameController) 
+    {
         this.model = model;
+        model.setSpeed(15);
         this.view = view;
         this.gameController = gameController;
         view.addKeyListener(this);
@@ -23,30 +26,35 @@ public class TankController implements KeyListener, ControllerInterface {
     }
     
 
-    public void setTankView(TankView view) {
+    public void setTankView(TankView view) 
+    {
         this.view = view;
         view.addKeyListener(this);
         view.setFocusable(true);
     }
 
-    public void updateView() {
+    public void updateView() 
+    {
         view.setBounds(model.getX(), model.getY(), 60, 60);
         view.repaint();
     }
 
-    public void setGameController(GameController gameController) {
+    public void setGameController(GameController gameController) 
+    {
         this.gameController = gameController;
     }
     
 
-    private void shootLaser() {
+    private void shootLaser() 
+    {
         LaserModel laserModel = new LaserModel(model.getX() + 30, model.getY() - 10, 5);
         LaserView laserView = new LaserView(laserModel);
         gameController.addLaser(laserModel, laserView);
     }
 
     @Override
-    public void handleInput(KeyEvent e) {
+    public void handleInput(KeyEvent e) 
+    {
         int keyCode = e.getKeyCode();
         switch(keyCode) {
             case KeyEvent.VK_LEFT:
@@ -63,9 +71,11 @@ public class TankController implements KeyListener, ControllerInterface {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) 
+    {
         int keyCode = e.getKeyCode();
-        switch (keyCode) {
+        switch (keyCode) 
+        {
             case KeyEvent.VK_LEFT:
                 model.moveLeft();
                 break;
@@ -80,12 +90,14 @@ public class TankController implements KeyListener, ControllerInterface {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent e) 
+    {
         // Do nothing
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) 
+    {
         // Do nothing
     }
 }

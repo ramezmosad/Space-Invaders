@@ -1,29 +1,35 @@
 package SIgame.model;
 
-public class LaserModel {
+public class LaserModel 
+{
     private int x;
     private int y;
     private int speed;
 
-    public LaserModel(int x, int y, int speed) {
+    public LaserModel(int x, int y, int speed) 
+    {
         this.x = x;
         this.y = y;
         this.speed = speed;
     }
 
-    public int getX() {
+    public int getX() 
+    {
         return x;
     }
 
-    public int getY() {
+    public int getY() 
+    {
         return y;
     }
 
-    public int getSpeed() {
+    public int getSpeed() 
+    {
         return speed;
     }
 
-    public void move() {
+    public void move() 
+    {
         y -= speed;
     }
 }
