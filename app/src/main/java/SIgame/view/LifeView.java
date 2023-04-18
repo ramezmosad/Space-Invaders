@@ -1,16 +1,23 @@
 package SIgame.view;
 
 import javax.swing.JLabel;
-import java.awt.*;
 
-public class Lives extends JLabel
+import SIgame.model.LifeTracker;
+
+import java.awt.*;
+import javax.swing.*;
+
+public class LifeView extends JLabel
 {
     JLabel livesLabel;
-    public Lives(int numOfLives)
+
+    public LifeView(int numOfLives)
     {
         livesLabel = new JLabel("Lives: " + numOfLives);
         livesLabel.setForeground(Color.WHITE);
-        livesLabel.setBounds(250, 10, 80, 30);
+        this.setBounds(250, 10, 80, 30);
+        setText("Lives: " + numOfLives);
+        setForeground(Color.WHITE);
     }
 
     public void loseLife(int numOfLives)

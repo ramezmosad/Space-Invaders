@@ -18,17 +18,18 @@ public class SpaceGUI
     ImageIcon icon;
     TankView tankView;
     AlienView alienView;
-
+    LifeView lifeView;
     GameController controller;
     Score score;
     String difficulty = "Normal"; //hard coded for now
 
-    public SpaceGUI(GameController gameController, Score score, TankView tankView, AlienView alienView) 
+    public SpaceGUI(GameController gameController, Score score, TankView tankView, AlienView alienView, LifeView lifeView) 
     {
         this.controller = gameController;
         this.score = score;
         this.tankView = tankView;
         this.alienView = alienView;
+        this.lifeView = lifeView;
 
         gameFrame = new JFrame("Space Invaders");
         gameScreen = new JPanel();
@@ -130,7 +131,7 @@ public class SpaceGUI
 
         this.alienView.setBounds(alienStartX + (0 * 50), 50, 40, 40);
         gameScreen.add(this.alienView);
-
+        gameScreen.add(this.lifeView);
         gameScreen.add(tankVieww);
         gameFrame.add(gameScreen);
         gameFrame.pack();

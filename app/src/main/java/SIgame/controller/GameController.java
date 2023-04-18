@@ -8,7 +8,8 @@ import java.util.List;
 
 public class GameController 
 {
-    
+    private LifeTracker lifeTracker;
+    private LifeView lifeView;
     private Score score;
     private TankView tankView;
     private SpaceGUI gui;
@@ -22,9 +23,11 @@ public class GameController
         AlienModel alienModel = new AlienModel(50, 50);
         AlienView alienView = new AlienView(0);
         alienController = new AlienController(alienModel, alienView);
+        this.lifeView = new LifeView(3);
+        this.lifeTracker = new LifeTracker(lifeView);
         this.score = score;
         this.tankView = new TankView();
-        this.gui = new SpaceGUI(this, score, this.tankView, alienView);
+        this.gui = new SpaceGUI(this, score, this.tankView, alienView, lifeView);
         this.laserModels = new ArrayList<>();
         this.laserViews = new ArrayList<>();
         this.laserControllers = new ArrayList<>();
@@ -39,7 +42,8 @@ public class GameController
         gui.addLaserToGameScreen(laserView);
     }
 
-    public void moveLasers() {
+    public void moveLasers() 
+    {
         for (int i = 0; i < laserModels.size(); i++) {
             LaserModel laserModel = laserModels.get(i);
             LaserView laserView = laserViews.get(i);
