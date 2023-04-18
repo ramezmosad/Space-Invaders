@@ -1,21 +1,15 @@
 package SIgame.model;
 
-public class TankModel {
+public class LaserModel {
     private int x;
     private int y;
     private int speed;
 
-    public TankModel(int x, int y, int speed) {
+    public LaserModel(int x, int y, int speed) {
         this.x = x;
         this.y = y;
         this.speed = speed;
     }
-
-    public LaserModel shoot() 
-    {
-        return new LaserModel(x + 27, y - 10, 5);
-    }
-    
 
     public int getX() {
         return x;
@@ -29,11 +23,7 @@ public class TankModel {
         return speed;
     }
 
-    public void moveLeft() {
-        x -= speed;
-    }
-
-    public void moveRight() {
-        x += speed;
+    public void move() {
+        y -= speed;
     }
 }

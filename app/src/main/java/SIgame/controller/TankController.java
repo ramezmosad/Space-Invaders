@@ -3,6 +3,8 @@ package SIgame.controller;
 import SIgame.ControllerInterface;
 import SIgame.model.TankModel;
 import SIgame.view.TankView;
+import SIgame.model.LaserModel;
+import SIgame.view.LaserView;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -10,9 +12,18 @@ import java.awt.event.KeyListener;
 public class TankController implements KeyListener, ControllerInterface {
     private TankModel model;
     private TankView view;
+    private GameController gameController;
 
-    public TankController(TankModel model, TankView view) {
+    public TankController(TankModel model, TankView view, GameController gameController) {
         this.model = model;
+        this.view = view;
+        this.gameController = gameController;
+        view.addKeyListener(this);
+        view.setFocusable(true);
+    }
+    
+
+    public void setTankView(TankView view) {
         this.view = view;
         view.addKeyListener(this);
         view.setFocusable(true);
@@ -21,6 +32,17 @@ public class TankController implements KeyListener, ControllerInterface {
     public void updateView() {
         view.setBounds(model.getX(), model.getY(), 60, 60);
         view.repaint();
+    }
+
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+    
+
+    private void shootLaser() {
+        LaserModel laserModel = new LaserModel(model.getX() + 30, model.getY() - 10, 5);
+        LaserView laserView = new LaserView(laserModel);
+        gameController.addLaser(laserModel, laserView);
     }
 
     @Override
@@ -33,13 +55,28 @@ public class TankController implements KeyListener, ControllerInterface {
             case KeyEvent.VK_RIGHT :
                 model.moveRight();
                 break;
+            case KeyEvent.VK_SPACE:
+                shootLaser();
+                break;
         }
         updateView();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        handleInput(e);
+        int keyCode = e.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.VK_LEFT:
+                model.moveLeft();
+                break;
+            case KeyEvent.VK_RIGHT:
+                model.moveRight();
+                break;
+            case KeyEvent.VK_SPACE:
+                shootLaser();
+                break;
+        }
+        updateView();
     }
 
     @Override

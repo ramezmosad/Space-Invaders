@@ -7,18 +7,30 @@ import SIgame.view.*;
 import SIgame.model.*;
 import SIgame.controller.*;
 
-public class App 
-{
-    public static void main(String[] args) 
-    { 
+public class App {
+    public static void main(String[] args) {
         Score score = new Score();
-        //TankModel tankModel = new TankModel(290, 420, 5);
-        TankView tankView = new TankView();
-        //TankController tankController = new TankController(tankModel, tankView);
-        //tankView.addKeyListener(tankController);
-        
+        TankModel tankModel = new TankModel(290, 420, 5);
+        GameController gameController = new GameController(score);
+        TankView tankView = gameController.getSpaceGUI().getTankView();
+        TankController tankController = new TankController(tankModel, tankView, gameController);
+        gameController.setTankView(tankView);
 
-        GameController controller = new GameController(score,tankView);
-        
+        Thread laserThread = new Thread(() -> {
+            while (true) {
+                gameController.moveLasers();
+
+                try 
+                {
+                    Thread.sleep(10);
+                } 
+                catch (InterruptedException e) 
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        laserThread.start();
     }
 }

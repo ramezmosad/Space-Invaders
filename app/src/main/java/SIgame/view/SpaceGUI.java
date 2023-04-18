@@ -18,23 +18,36 @@ public class SpaceGUI
     ImageIcon icon;
     TankView tankView;
 
-    GameControllerInterface controller;
+    GameController controller;
     Score score;
     String difficulty = "Normal"; //hard coded for now
 
-    public SpaceGUI(GameControllerInterface gameController, Score score, TankView tankView)
-    {   
+    public SpaceGUI(GameController gameController, Score score, TankView tankView) {
         this.controller = gameController;
         this.score = score;
         this.tankView = tankView;
 
-        menuFrame = new JFrame("Space Invaders");
-        titleScreen = new JPanel();
-
+        gameFrame = new JFrame("Space Invaders");
         gameScreen = new JPanel();
 
-        //drawMainMenu();
-        drawGameScreen(difficulty,this.tankView);
+        drawGameScreen(difficulty, this.tankView);
+    }
+
+    public void addLaserToGameScreen(LaserView laserView) 
+    {
+        gameScreen.add(laserView);
+        gameScreen.revalidate();
+        gameScreen.repaint();
+    }
+
+    public TankView getTankView() 
+    {
+        return tankView;
+    }
+
+    public JPanel getGameScreen() 
+    {
+        return gameScreen;
     }
 
     // public void drawMainMenu() {
@@ -70,7 +83,7 @@ public class SpaceGUI
     //     menuFrame.setVisible(true);
     // } 
 
-    public void drawGameScreen(String difficulty,TankView tankVieww) 
+    public void drawGameScreen(String difficulty, TankView tankVieww) 
     {
         int alienStartX = 50;
         gameFrame = new JFrame(difficulty);
@@ -98,10 +111,7 @@ public class SpaceGUI
         // JLabel tankLabel = new JLabel(tankIcon);
         // tankLabel.setBounds(290, 420, 60, 60);
         //this.tankView = tankView;
-        TankView test = new TankView();
-        test.setBounds(290, 420, 60, 60);
-        gameScreen.add(test);
-             
+    
         // for (int i = 0; i < 6; i++) 
         // {
         //     ImageIcon alienIcon = new ImageIcon(getClass().getClassLoader().getResource("alien.png"));
@@ -116,11 +126,23 @@ public class SpaceGUI
         //TankController tankController = new TankController(tankModel, tankView);
 
 
-
+        gameScreen.add(tankVieww);
         gameFrame.add(gameScreen);
         gameFrame.pack();
         gameFrame.setVisible(true);
     }
+
+
+    // Add a new method for adding lasers to the game screen:
+    public void addLaser(LaserModel laserModel) 
+    {
+        LaserView laserView = new LaserView(laserModel);
+        laserView.setBounds(laserModel.getX(), laserModel.getY(), LaserView.WIDTH, LaserView.HEIGHT);
+        gameScreen.add(laserView);
+        gameScreen.repaint();
+    }
+    
+
 
 
 }
