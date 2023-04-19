@@ -16,7 +16,6 @@ public class AlienView extends JLabel
         alienIcon = new ImageIcon(getClass().getClassLoader().getResource("alien.png"));
         scaledAlien = alienIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
         alienIcon = new ImageIcon(scaledAlien);
-        // alienLabel = new JLabel(alienIcon);
         setIcon(alienIcon);
     }
 

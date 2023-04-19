@@ -8,12 +8,14 @@ public class AlienController
     private AlienModel alienModel;
     private AlienView alienView;
 
-    public AlienController(AlienModel alienModel, AlienView alienView) {
+    public AlienController(AlienModel alienModel, AlienView alienView) 
+    {
         this.alienModel = alienModel;
         this.alienView = alienView;
     }
 
-    public boolean isCollision(LaserController laserController) {
+    public boolean isCollision(LaserController laserController) 
+    {
         final int MARGIN = 1;
     
         LaserModel laserModel = laserController.getLaserModel();
@@ -35,7 +37,8 @@ public class AlienController
     
     
 
-    public void removeAlien(SpaceGUI spaceGUI) {
+    public void removeAlien(SpaceGUI spaceGUI) 
+    {
         spaceGUI.getGameScreen().remove(alienView);
         spaceGUI.getGameScreen().revalidate();
         spaceGUI.getGameScreen().repaint();

@@ -6,11 +6,13 @@ import java.awt.*;
 import SIgame.controller.*;
 import SIgame.model.*;
 
-public class TankView extends JLabel {
+public class TankView extends JLabel 
+{
     ImageIcon tankIcon;
     Image scaledTank;
 
-    public TankView() {
+    public TankView() 
+    {
         tankIcon = new ImageIcon(getClass().getClassLoader().getResource("tank.png"));
         scaledTank = tankIcon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
         tankIcon = new ImageIcon(scaledTank);

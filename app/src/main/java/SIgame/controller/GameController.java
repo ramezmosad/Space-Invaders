@@ -71,17 +71,18 @@ public class GameController
             {
                 alienController.removeAlien(gui);
                 System.out.println("it colided");
-                // You can also stop updating the laser here or remove it from the game screen
             }
         }
     }
 
 
-    public SpaceGUI getSpaceGUI() {
+    public SpaceGUI getSpaceGUI() 
+    {
         return gui;
     }
 
-    public void setTankView(TankView tankView) {
+    public void setTankView(TankView tankView) 
+    {
         this.tankView = tankView;
     }
 }

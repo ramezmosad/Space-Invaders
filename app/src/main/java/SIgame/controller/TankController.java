@@ -92,12 +92,12 @@ public class TankController implements KeyListener, ControllerInterface
     @Override
     public void keyTyped(KeyEvent e) 
     {
-        // Do nothing
+        
     }
 
     @Override
     public void keyReleased(KeyEvent e) 
     {
-        // Do nothing
+        
     }
 }

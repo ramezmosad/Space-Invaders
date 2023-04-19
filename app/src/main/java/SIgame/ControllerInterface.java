@@ -2,6 +2,7 @@ package SIgame;
 
 import java.awt.event.KeyEvent;
 
-public interface ControllerInterface {
+public interface ControllerInterface 
+{
     void handleInput(KeyEvent e);
 }
