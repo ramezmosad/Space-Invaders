@@ -70,6 +70,7 @@ public class GameController
             if (alienController.isCollision(laserController)) 
             {
                 alienController.removeAlien(gui);
+                
                 System.out.println("it colided");
             }
         }

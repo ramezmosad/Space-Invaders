@@ -18,6 +18,10 @@ public class LaserController
     {
         return this.model;
     }
+    public LaserView getLaserView()
+    {
+        return this.view;
+    }
 
     public void updateView() 
     {
@@ -28,5 +32,10 @@ public class LaserController
     public void moveLaser() 
     {
         model.move();
+    }
+
+    public void laserHitRemove()
+    {
+        view.remove(view);
     }
 }
