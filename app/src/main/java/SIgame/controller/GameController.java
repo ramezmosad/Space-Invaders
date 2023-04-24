@@ -20,17 +20,18 @@ public class GameController
 
     public GameController(Score score) 
     {
-        AlienModel alienModel = new AlienModel(50, 50);
-        AlienView alienView = new AlienView(0);
-        alienController = new AlienController(alienModel, alienView);
+
         this.lifeView = new LifeView(3);
         this.lifeTracker = new LifeTracker(lifeView);
         this.score = score;
         this.tankView = new TankView();
+        AlienView alienView = new AlienView(0);
         this.gui = new SpaceGUI(this, score, this.tankView, alienView, lifeView);
         this.laserModels = new ArrayList<>();
         this.laserViews = new ArrayList<>();
         this.laserControllers = new ArrayList<>();
+        AlienModel alienModel = new AlienModel(50, 50);
+        alienController = new AlienController(alienModel, alienView, this, true);
     }
 
     public void addLaser(LaserModel laserModel, LaserView laserView) 
