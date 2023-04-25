@@ -7,7 +7,6 @@ public class AlienView extends JLabel
 {
     private ImageIcon alienIcon;
     private Image scaledAlien;
-    private JLabel alienLabel;
     private int alienID;
 
     public AlienView(int alienID)
@@ -23,6 +22,4 @@ public class AlienView extends JLabel
     {
         return alienID;
     }
-
-
 }

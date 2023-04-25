@@ -2,12 +2,8 @@ package SIgame.view;
 
 import javax.swing.*;
 import SIgame.model.*;
-import SIgame.view.*;
-
 import java.awt.*;
-import SIgame.*;
 import SIgame.controller.GameController;
-
 
 public class SpaceGUI
 {
@@ -55,7 +51,6 @@ public class SpaceGUI
         return gameScreen;
     }
 
-
     public void drawGameScreen(String difficulty, TankView tankVieww) 
     {
         int alienStartX = 50;
@@ -93,5 +88,4 @@ public class SpaceGUI
         gameScreen.add(laserView);
         gameScreen.repaint();
     }
-    
 }

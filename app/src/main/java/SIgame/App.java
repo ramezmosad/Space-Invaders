@@ -10,8 +10,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class App {
-    public static void main(String[] args) {
+public class App 
+{
+    public static void main(String[] args) 
+    {
         Score score = new Score();
         TankModel tankModel = new TankModel(290, 420, 5);
         GameController gameController = new GameController(score);
@@ -19,10 +21,11 @@ public class App {
         TankController tankController = new TankController(tankModel, tankView, gameController);
         gameController.setTankView(tankView);
 
-        // Replace the Thread with a Swing Timer
-        Timer laserTimer = new Timer(10, new ActionListener() {
+        Timer laserTimer = new Timer(10, new ActionListener() 
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) 
+            {
                 gameController.moveLasers();
                 gameController.checkForCollisions();
             }

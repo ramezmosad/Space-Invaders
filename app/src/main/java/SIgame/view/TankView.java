@@ -19,4 +19,25 @@ public class TankView extends JLabel
         setIcon(tankIcon);
         this.setBounds(290, 420, 60, 60);
     }
+
+    public boolean isCollision(LaserController laserController) 
+    {
+        final int MARGIN = 1;
+        
+        LaserModel laserModel = laserController.getLaserModel();
+        int laserX = laserModel.getX();
+        int laserY = laserModel.getY();
+        int laserWidth = LaserView.WIDTH;
+        int laserHeight = LaserView.HEIGHT;
+    
+        int tankX = getX();
+        int tankY = getY();
+        int tankWidth = 60;
+        int tankHeight = 60;
+    
+        boolean xOverlap = (laserX + laserWidth + MARGIN >= tankX) && (laserX - MARGIN <= tankX + tankWidth);
+        boolean yOverlap = (laserY + laserHeight + MARGIN >= tankY) && (laserY - MARGIN <= tankY + tankHeight);
+    
+        return xOverlap && yOverlap;
+    }
 }

@@ -4,11 +4,10 @@ import SIgame.model.*;
 import SIgame.view.*;
 import java.util.*;
 import java.awt.event.*;
-import javax.swing.*;
 import javax.swing.Timer;
-import java.util.concurrent.locks.ReentrantLock;
 
-public class AlienController {
+public class AlienController 
+{
     private AlienModel alienModel;
     private AlienView alienView;
     private LaserController laserController;
@@ -17,7 +16,8 @@ public class AlienController {
     private Timer shootingTimer;
     private ArrayList<Integer> timeIntervals;
 
-    public AlienController(AlienModel alienModel, AlienView alienView, GameController gameController, boolean doesShoot) {
+    public AlienController(AlienModel alienModel, AlienView alienView, GameController gameController, boolean doesShoot) 
+    {
         this.alienModel = alienModel;
         this.alienView = alienView;
         this.gameController = gameController;
@@ -27,11 +27,15 @@ public class AlienController {
         Random random = new Random();
         int randomTimeInterval = timeIntervals.get(random.nextInt(timeIntervals.size()));
 
-        if (doesShoot && !isHit) {
-            shootingTimer = new Timer(randomTimeInterval, new ActionListener() {
+        if (doesShoot && !isHit) 
+        {
+            shootingTimer = new Timer(randomTimeInterval, new ActionListener() 
+            {
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (!isHit) {
+                public void actionPerformed(ActionEvent e) 
+                {
+                    if (!isHit) 
+                    {
                         shootLaser();
                     }
                 }
@@ -43,9 +47,8 @@ public class AlienController {
     public boolean isCollision(LaserController laserController) 
     {
         final int MARGIN = 1;
-
-        if(!isHit){
-    
+        if(!isHit)
+        {
             LaserModel laserModel = laserController.getLaserModel();
             int laserX = laserModel.getX();
             int laserY = laserModel.getY();
@@ -64,16 +67,13 @@ public class AlienController {
         }
         return false;
     }
+
     private void shootLaser() 
     {
         LaserModel laserModel = new LaserModel(alienModel.getX() + 20, alienModel.getY() + 40, -3);
         LaserView laserView = new LaserView(laserModel);
         gameController.addLaser(laserModel, laserView);
     }
-
-    
-    
-    
 
     public void removeAlien(SpaceGUI spaceGUI) 
     {

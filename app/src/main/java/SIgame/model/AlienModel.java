@@ -11,7 +11,6 @@ public class AlienModel
         this.pos_y = pos_y;
     }
     
-
     public int getX()
     {
         return pos_x;
@@ -31,7 +30,4 @@ public class AlienModel
     {
         this.pos_y = y;
     }
-
-
-    
 }

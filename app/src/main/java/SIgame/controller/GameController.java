@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GameController 
 {
-    private LifeTracker lifeTracker;
+    private LifeModel lifeModel;
     private LifeView lifeView;
     private Score score;
     private TankView tankView;
@@ -20,9 +20,8 @@ public class GameController
 
     public GameController(Score score) 
     {
-
         this.lifeView = new LifeView(3);
-        this.lifeTracker = new LifeTracker(lifeView);
+        this.lifeModel = new LifeModel();
         this.score = score;
         this.tankView = new TankView();
         AlienView alienView = new AlienView(0);
@@ -43,9 +42,17 @@ public class GameController
         gui.addLaserToGameScreen(laserView);
     }
 
+    public void removeLaser(LaserModel laserModel, LaserView laserView) 
+    {
+        gui.getGameScreen().remove(laserView);
+        gui.getGameScreen().revalidate();
+        gui.getGameScreen().repaint();
+    }    
+
     public void moveLasers() 
     {
-        for (int i = 0; i < laserModels.size(); i++) {
+        for (int i = 0; i < laserModels.size(); i++) 
+        {
             LaserModel laserModel = laserModels.get(i);
             LaserView laserView = laserViews.get(i);
             LaserController laserController = laserControllers.get(i);
@@ -53,7 +60,8 @@ public class GameController
             laserController.moveLaser();
             laserController.updateView();
 
-            if (laserModel.getY() < -LaserView.HEIGHT) {
+            if (laserModel.getY() < -LaserView.HEIGHT) 
+            {
                 gui.getGameScreen().remove(laserView);
                 gui.getGameScreen().revalidate();
                 gui.getGameScreen().repaint();
@@ -66,17 +74,32 @@ public class GameController
         }
     }
 
-    public void checkForCollisions() {
-        for (LaserController laserController : laserControllers) {
+    public void checkForCollisions() 
+    {
+        for (int i = 0; i < laserControllers.size(); i++) 
+        {
+            LaserController laserController = laserControllers.get(i);
+    
             if (alienController.isCollision(laserController)) 
             {
                 alienController.removeAlien(gui);
-                
-                System.out.println("it colided");
+                System.out.println("Alien collided with laser");
+            }
+    
+            if (tankView.isCollision(laserController)) 
+            {
+                lifeModel.hitByAlien();
+                lifeView.loseLife(lifeModel.getLives());
+                System.out.println("Tank collided with laser");
+    
+                removeLaser(laserModels.get(i), laserViews.get(i));
+                laserModels.remove(i);
+                laserViews.remove(i);
+                laserControllers.remove(i);
+                i--;
             }
         }
     }
-
 
     public SpaceGUI getSpaceGUI() 
     {

@@ -15,7 +15,6 @@ public class TankController implements KeyListener, ControllerInterface
     private TankView view;
     private GameController gameController;
     
-
     public TankController(TankModel model, TankView view, GameController gameController) 
     {
         this.model = model;
@@ -26,7 +25,6 @@ public class TankController implements KeyListener, ControllerInterface
         view.setFocusable(true);
         view.requestFocusInWindow();
     }
-    
 
     public void setTankView(TankView view) 
     {
@@ -46,13 +44,12 @@ public class TankController implements KeyListener, ControllerInterface
         this.gameController = gameController;
     }
     
-
     private void shootLaser() 
     {
         LaserModel laserModel = new LaserModel(model.getX() + 30, model.getY() - 10, 5);
         LaserView laserView = new LaserView(laserModel);
         gameController.addLaser(laserModel, laserView);
-    }
+    }    
 
     @Override
     public void handleInput(KeyEvent e) 
@@ -92,14 +89,9 @@ public class TankController implements KeyListener, ControllerInterface
     }
 
     @Override
-    public void keyTyped(KeyEvent e) 
-    {
-        
-    }
+    public void keyTyped(KeyEvent e){}
 
     @Override
-    public void keyReleased(KeyEvent e) 
-    {
-        
-    }
+    public void keyReleased(KeyEvent e){}  
+    
 }

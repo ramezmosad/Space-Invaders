@@ -18,7 +18,6 @@ public class TankModel
         return new LaserModel(x + 27, y - 10, 5);
     }
     
-
     public int getX() 
     {
         return x;
