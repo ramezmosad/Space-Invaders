@@ -14,6 +14,7 @@ public class TankController implements KeyListener, ControllerInterface
     private TankModel model;
     private TankView view;
     private GameController gameController;
+    
 
     public TankController(TankModel model, TankView view, GameController gameController) 
     {
@@ -23,6 +24,7 @@ public class TankController implements KeyListener, ControllerInterface
         this.gameController = gameController;
         view.addKeyListener(this);
         view.setFocusable(true);
+        view.requestFocusInWindow();
     }
     
 
