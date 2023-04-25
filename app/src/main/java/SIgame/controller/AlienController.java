@@ -15,50 +15,27 @@ public class AlienController
     private LaserController laserController;
     private boolean isHit;
     private GameController gameController;
-    private ArrayList<Integer> timeIntervals;
-    private int interval;
-    private boolean doesShoot;
-    private ReentrantLock lock;
-    private Thread alienThread;
+    private Timer shootingTimer;
 
-    public AlienController(AlienModel alienModel, AlienView alienView, GameController gameController, boolean doesShoot) 
-    {
-        timeIntervals = new ArrayList();
-        timeIntervals.add(10000);
-        timeIntervals.add(15000);
-        timeIntervals.add(20000);
-        timeIntervals.add(25000);
-        timeIntervals.add(30000);
-        timeIntervals.add(40000);
+    public AlienController(AlienModel alienModel, AlienView alienView, GameController gameController, boolean doesShoot) {
         this.alienModel = alienModel;
         this.alienView = alienView;
         this.gameController = gameController;
-        this.doesShoot = doesShoot;
         this.isHit = false;
-        Random random = new Random();
-        //interval = timeIntervals.get(random.nextInt(6)); 
-        interval = 5000; // hard-coded for now
 
-        this.lock = new ReentrantLock();
         if (doesShoot && !isHit) {
-            Thread alienThread = new Thread(() -> {
-                while (!isHit) {
-                    lock.lock();
-                    try {
+            shootingTimer = new Timer(5000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (!isHit) {
                         shootLaser();
-                    } finally {
-                        lock.unlock();
-                    }
-                    try {
-                        Thread.sleep(interval);
-                    } catch (InterruptedException e) {
-                        // handle interruption
                     }
                 }
             });
-            alienThread.start();
+            shootingTimer.start();
         }
     }
+
     public boolean isCollision(LaserController laserController) 
     {
         final int MARGIN = 1;
