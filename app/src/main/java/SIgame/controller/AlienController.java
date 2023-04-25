@@ -8,14 +8,14 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class AlienController 
-{
+public class AlienController {
     private AlienModel alienModel;
     private AlienView alienView;
     private LaserController laserController;
     private boolean isHit;
     private GameController gameController;
     private Timer shootingTimer;
+    private ArrayList<Integer> timeIntervals;
 
     public AlienController(AlienModel alienModel, AlienView alienView, GameController gameController, boolean doesShoot) {
         this.alienModel = alienModel;
@@ -23,8 +23,12 @@ public class AlienController
         this.gameController = gameController;
         this.isHit = false;
 
+        timeIntervals = new ArrayList<>(Arrays.asList(5000, 10000, 15000, 20000));
+        Random random = new Random();
+        int randomTimeInterval = timeIntervals.get(random.nextInt(timeIntervals.size()));
+
         if (doesShoot && !isHit) {
-            shootingTimer = new Timer(5000, new ActionListener() {
+            shootingTimer = new Timer(randomTimeInterval, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (!isHit) {
