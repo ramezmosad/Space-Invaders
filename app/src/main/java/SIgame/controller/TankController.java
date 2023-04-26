@@ -62,8 +62,10 @@ public class TankController implements KeyListener, ControllerInterface
     //     gameController.addLaser(laserModel, laserView);
     // }
 
-    private void shootLaser() {
-        try {
+    private void shootLaser() 
+    {
+        try 
+        {
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("laser.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
             DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());

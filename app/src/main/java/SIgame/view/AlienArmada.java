@@ -22,9 +22,9 @@ public class AlienArmada
     {
         int rows = 3;
         int columns = 9;
-        int alienWidth = 40;
-        int alienHeight = 40;
-        int horizontalSpacing = 20;
+        int alienWidth = 20;
+        int alienHeight = 20;
+        int horizontalSpacing = 40;
         int verticalSpacing = 10;
 
         for (int i = 0; i < rows; i++) 
