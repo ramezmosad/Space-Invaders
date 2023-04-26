@@ -89,13 +89,15 @@ public class SpaceGUI
         gameFrame.setVisible(true);
     }
     
-
-
     public void addLaser(LaserModel laserModel) 
     {
         LaserView laserView = new LaserView(laserModel, Color.red);
         laserView.setBounds(laserModel.getX(), laserModel.getY(), LaserView.WIDTH, LaserView.HEIGHT);
         gameScreen.add(laserView);
         gameScreen.repaint();
+    }
+    
+    public void addBarrierToGameScreen(BarrierView barrierView) {
+        gameScreen.add(barrierView);
     }
 }

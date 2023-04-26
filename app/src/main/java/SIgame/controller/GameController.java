@@ -5,6 +5,8 @@ import SIgame.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Color;
+import java.awt.color.*;
 
 public class GameController 
 {
@@ -16,6 +18,7 @@ public class GameController
     private List<LaserModel> laserModels;
     private List<LaserView> laserViews;
     private List<LaserController> laserControllers;
+    private List<BarrierView> barrierViews;
     private AlienArmada alienArmada;
     private ScoreView scoreView;
 
@@ -30,8 +33,11 @@ public class GameController
         this.laserViews = new ArrayList<>();
         this.laserControllers = new ArrayList<>();
         this.scoreView = new ScoreView(score);
-        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada, scoreView);
+        this.barrierViews = new ArrayList<>();
+        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada, scoreView); // Move this line before addBarriers()
+        addBarriers();
     }
+    
 
     public void addLaser(LaserModel laserModel, LaserView laserView) 
     {
@@ -76,34 +82,86 @@ public class GameController
 
     public void checkForCollisions() 
     {
+        List<Integer> lasersToRemove = new ArrayList<>();
         for (int i = 0; i < laserControllers.size(); i++) 
         {
             LaserController laserController = laserControllers.get(i);
-            for (AlienController alienController : alienArmada.getAliens()) {
-                if (alienController.isCollision(laserController) && laserController.isRed == true) {
+            boolean laserRemoved = false;
+
+            for (AlienController alienController : alienArmada.getAliens()) 
+            {
+                if (alienController.isCollision(laserController) && laserController.isRed == true) 
+                {
                     score.gainPoint();
                     scoreView.updateScore(score.getCurrentScore());
                     alienController.removeAlien(gui);
                     System.out.println("Alien collided with laser");
-                    removeLaser(laserModels.get(i), laserViews.get(i));
-                    laserModels.remove(i);
-                    laserViews.remove(i);
-                    laserControllers.remove(i);
+                    lasersToRemove.add(i);
+                    laserRemoved = true;
+                    break;
+                }
+            }   
+        
+            if (laserRemoved) continue;
+
+            for (int j = 0; j < barrierViews.size(); j++) 
+            {
+                BarrierView barrierView = barrierViews.get(j);
+                BarrierModel barrierModel = barrierView.getBarrierModel();
+
+                if (barrierView.getBounds().intersects(laserController.getLaserView().getBounds())) 
+                {
+                    lasersToRemove.add(i);
+                    if (barrierModel.hitByLaser()) 
+                    {
+                        barrierView.updateHitCountLabel(barrierModel.getHitCount());
+                        if (barrierModel.getHitCount() <= 0) 
+                        {
+                        gui.getGameScreen().remove(barrierView);
+                        gui.getGameScreen().revalidate();
+                        gui.getGameScreen().repaint();
+                        barrierViews.remove(j);
+                        }
+                    }
+                    break;
                 }
             }
-    
+
             if (tankView.isCollision(laserController)) 
             {
                 lifeModel.hitByAlien();
                 lifeView.loseLife(lifeModel.getLives());
                 System.out.println("Tank collided with laser");
-    
-                removeLaser(laserModels.get(i), laserViews.get(i));
-                laserModels.remove(i);
-                laserViews.remove(i);
-                laserControllers.remove(i);
-                i--;
+                lasersToRemove.add(i);
             }
+        }
+
+        for (int i = lasersToRemove.size() - 1; i >= 0; i--)
+        {
+            int index = lasersToRemove.get(i);
+            removeLaser(laserModels.get(index), laserViews.get(index));
+            laserModels.remove(index);
+            laserViews.remove(index);
+            laserControllers.remove(index);
+        }
+    }
+    
+
+    private void addBarriers() 
+    {
+        int barrierWidth = 50;
+        int barrierHeight = 25;
+        int numberOfBarriers = 3;
+        int barrierSpacing = 150;
+        int barrierStartX = 100;
+        int barrierY = 350;
+    
+        for (int i = 0; i < numberOfBarriers; i++) 
+        {
+            BarrierModel barrierModel = new BarrierModel(barrierStartX + (i * (barrierWidth + barrierSpacing)), barrierY, barrierWidth, barrierHeight);
+            BarrierView barrierView = new BarrierView(barrierModel, Color.GREEN);
+            barrierViews.add(barrierView);
+            gui.addBarrierToGameScreen(barrierView);
         }
     }
 
