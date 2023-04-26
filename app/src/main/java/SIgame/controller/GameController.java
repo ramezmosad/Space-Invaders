@@ -16,7 +16,7 @@ public class GameController
     private List<LaserModel> laserModels;
     private List<LaserView> laserViews;
     private List<LaserController> laserControllers;
-    private AlienController alienController;
+    private AlienArmada alienArmada;
 
     public GameController(Score score) 
     {
@@ -24,13 +24,11 @@ public class GameController
         this.lifeModel = new LifeModel();
         this.score = score;
         this.tankView = new TankView();
-        AlienView alienView = new AlienView(0);
-        this.gui = new SpaceGUI(this, score, this.tankView, alienView, lifeView);
+        this.alienArmada = new AlienArmada(this);
+        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada);
         this.laserModels = new ArrayList<>();
         this.laserViews = new ArrayList<>();
         this.laserControllers = new ArrayList<>();
-        AlienModel alienModel = new AlienModel(50, 50);
-        alienController = new AlienController(alienModel, alienView, this, true);
     }
 
     public void addLaser(LaserModel laserModel, LaserView laserView) 
@@ -79,11 +77,11 @@ public class GameController
         for (int i = 0; i < laserControllers.size(); i++) 
         {
             LaserController laserController = laserControllers.get(i);
-    
-            if (alienController.isCollision(laserController)) 
-            {
-                alienController.removeAlien(gui);
-                System.out.println("Alien collided with laser");
+            for (AlienController alienController : alienArmada.getAliens()) {
+                if (alienController.isCollision(laserController)) {
+                    alienController.removeAlien(gui);
+                    System.out.println("Alien collided with laser");
+                }
             }
     
             if (tankView.isCollision(laserController)) 

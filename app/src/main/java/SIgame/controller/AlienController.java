@@ -83,4 +83,14 @@ public class AlienController
         spaceGUI.getGameScreen().revalidate();
         spaceGUI.getGameScreen().repaint();
     }
+
+    public AlienView getAlienView()
+    {
+        return this.alienView;
+    }
+
+    public AlienModel getAlienModel() 
+    {
+        return this.alienModel;
+    }    
 }

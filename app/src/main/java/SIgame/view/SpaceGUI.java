@@ -3,7 +3,7 @@ package SIgame.view;
 import javax.swing.*;
 import SIgame.model.*;
 import java.awt.*;
-import SIgame.controller.GameController;
+import SIgame.controller.*;
 
 public class SpaceGUI
 {
@@ -18,15 +18,17 @@ public class SpaceGUI
     LifeView lifeView;
     GameController controller;
     Score score;
+    AlienArmada alienArmada;
     String difficulty = "Normal"; //hard coded for now
 
-    public SpaceGUI(GameController gameController, Score score, TankView tankView, AlienView alienView, LifeView lifeView) 
+    public SpaceGUI(GameController gameController, Score score, TankView tankView, LifeView lifeView, AlienArmada alienArmada) 
     {
         this.controller = gameController;
         this.score = score;
         this.tankView = tankView;
         this.alienView = alienView;
         this.lifeView = lifeView;
+        this.alienArmada = alienArmada;
 
         gameFrame = new JFrame("Space Invaders");
         gameScreen = new JPanel();
@@ -60,26 +62,33 @@ public class SpaceGUI
         gameScreen.setBackground(Color.BLACK);
         gameScreen.setPreferredSize(new Dimension(640, 480));
         gameScreen.setLayout(null);
-
+    
         JLabel scoreLabel = new JLabel("Score: 5");
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setBounds(20, 10, 80, 30);
         gameScreen.add(scoreLabel);
-
+    
         JLabel highScoreLabel = new JLabel("High Score: 35");
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setBounds(120, 10, 100, 30);
         gameScreen.add(highScoreLabel);
-        this.alienView.setBounds(alienStartX + (0 * 50), 50, 40, 40);
-        
-        gameScreen.add(this.alienView);
+    
+        for (AlienController alienController : alienArmada.getAliens()) {
+            AlienView alienView = alienController.getAlienView();
+            AlienModel alienModel = alienController.getAlienModel();
+            alienView.setBounds(alienModel.getX(), alienModel.getY(), 40, 40);
+            gameScreen.add(alienView);
+        }
+    
         gameScreen.add(this.lifeView);
         gameScreen.add(tankVieww);
-
+    
         gameFrame.add(gameScreen);
         gameFrame.pack();
         gameFrame.setVisible(true);
     }
+    
+
 
     public void addLaser(LaserModel laserModel) 
     {
