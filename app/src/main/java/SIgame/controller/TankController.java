@@ -6,6 +6,7 @@ import SIgame.view.TankView;
 import SIgame.model.LaserModel;
 import SIgame.view.LaserView;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -47,7 +48,7 @@ public class TankController implements KeyListener, ControllerInterface
     private void shootLaser() 
     {
         LaserModel laserModel = new LaserModel(model.getX() + 30, model.getY() - 10, 5);
-        LaserView laserView = new LaserView(laserModel);
+        LaserView laserView = new LaserView(laserModel, Color.RED);
         gameController.addLaser(laserModel, laserView);
     }    
 

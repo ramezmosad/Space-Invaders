@@ -11,10 +11,12 @@ public class LaserView extends JPanel
     public static final int HEIGHT = 10;
 
     private LaserModel laserModel;
+    private Color color;
 
-    public LaserView(LaserModel laserModel) 
+    public LaserView(LaserModel laserModel, Color color) 
     {
         this.laserModel = laserModel;
+        this.color = color;
         setOpaque(false);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
@@ -28,7 +30,7 @@ public class LaserView extends JPanel
     protected void paintComponent(Graphics g) 
     {
         super.paintComponent(g);
-        g.setColor(Color.RED);
+        g.setColor(color);
         g.fillRect(0, 0, WIDTH, HEIGHT);
     }
 }

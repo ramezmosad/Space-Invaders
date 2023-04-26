@@ -93,7 +93,7 @@ public class SpaceGUI
 
     public void addLaser(LaserModel laserModel) 
     {
-        LaserView laserView = new LaserView(laserModel);
+        LaserView laserView = new LaserView(laserModel, Color.red);
         laserView.setBounds(laserModel.getX(), laserModel.getY(), LaserView.WIDTH, LaserView.HEIGHT);
         gameScreen.add(laserView);
         gameScreen.repaint();

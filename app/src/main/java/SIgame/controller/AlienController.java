@@ -3,6 +3,7 @@ package SIgame.controller;
 import SIgame.model.*;
 import SIgame.view.*;
 import java.util.*;
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.Timer;
 
@@ -71,7 +72,7 @@ public class AlienController
     private void shootLaser() 
     {
         LaserModel laserModel = new LaserModel(alienModel.getX() + 20, alienModel.getY() + 40, -3);
-        LaserView laserView = new LaserView(laserModel);
+        LaserView laserView = new LaserView(laserModel, Color.GREEN);
         gameController.addLaser(laserModel, laserView);
     }
 
