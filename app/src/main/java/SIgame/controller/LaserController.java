@@ -9,7 +9,7 @@ public class LaserController
 {
     private LaserModel model;
     private LaserView view;
-    public boolean red;
+    public boolean isRed;
 
     public LaserController(LaserModel model, LaserView view) 
     {
@@ -17,11 +17,11 @@ public class LaserController
         this.view = view;
         if (view.color == Color.RED)
         {
-            red = true;
+            isRed = true;
         }
         else
         {
-            red = false;
+            isRed = false;
         }
     }
 

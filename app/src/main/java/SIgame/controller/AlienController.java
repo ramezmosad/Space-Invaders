@@ -24,7 +24,7 @@ public class AlienController
         this.gameController = gameController;
         this.isHit = false;
 
-        timeIntervals = new ArrayList<>(Arrays.asList(5000, 10000, 15000, 20000));
+        timeIntervals = new ArrayList<>(Arrays.asList(2000, 5000, 10000, 15000, 20000));
         Random random = new Random();
         int randomTimeInterval = timeIntervals.get(random.nextInt(timeIntervals.size()));
 

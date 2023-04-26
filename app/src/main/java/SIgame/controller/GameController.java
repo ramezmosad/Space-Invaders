@@ -80,7 +80,7 @@ public class GameController
         {
             LaserController laserController = laserControllers.get(i);
             for (AlienController alienController : alienArmada.getAliens()) {
-                if (alienController.isCollision(laserController) && laserController.red == true) {
+                if (alienController.isCollision(laserController) && laserController.isRed == true) {
                     score.gainPoint();
                     scoreView.updateScore(score.getCurrentScore());
                     alienController.removeAlien(gui);

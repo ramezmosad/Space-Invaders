@@ -10,6 +10,14 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.net.URL;
+import javax.sound.sampled.*;
+
 public class TankController implements KeyListener, ControllerInterface
 {
     private TankModel model;
@@ -44,13 +52,34 @@ public class TankController implements KeyListener, ControllerInterface
     {
         this.gameController = gameController;
     }
-    
+
+    // private void shootLaser() 
+    // {
+    //     LaserModel laserModel = new LaserModel(model.getX() + 30, model.getY() - 10, 5);
+    //     LaserView laserView = new LaserView(laserModel, Color.RED);
+    //     gameController.addLaser(laserModel, laserView);
+    // }
+
     private void shootLaser() 
     {
+        try {
+            URL soundUrl = getClass().getResource("/resources/laser.wav");
+            System.out.println("soundUrl: " + soundUrl);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundUrl);
+            System.out.println("audioInputStream: " + audioInputStream);
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         LaserModel laserModel = new LaserModel(model.getX() + 30, model.getY() - 10, 5);
         LaserView laserView = new LaserView(laserModel, Color.RED);
         gameController.addLaser(laserModel, laserView);
-    }    
+    }
+    
+    
 
     @Override
     public void handleInput(KeyEvent e) 
