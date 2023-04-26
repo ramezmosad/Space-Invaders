@@ -112,9 +112,9 @@ public class GameController
                 if (barrierView.getBounds().intersects(laserController.getLaserView().getBounds())) 
                 {
                     lasersToRemove.add(i);
-                    if (barrierModel.hitByLaser()) 
-                    {
-                        barrierView.updateHitCountLabel(barrierModel.getHitCount());
+    
+                        barrierView.getBarrierModel().hitByLaser();
+                        barrierView.updateHitCountLabel(barrierView.getBarrierModel().getHitCount());
                         if (barrierModel.getHitCount() <= 0) 
                         {
                         gui.getGameScreen().remove(barrierView);
@@ -122,7 +122,7 @@ public class GameController
                         gui.getGameScreen().repaint();
                         barrierViews.remove(j);
                         }
-                    }
+                    
                     break;
                 }
             }

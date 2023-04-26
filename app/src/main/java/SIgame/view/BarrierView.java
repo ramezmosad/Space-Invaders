@@ -33,7 +33,8 @@ public class BarrierView extends JPanel
 
     public void updateHitCountLabel(int hitCount) 
     {
-        hitCountLabel.setText(Integer.toString(hitCount));
+        hitCountLabel.setText("" + hitCount);
+        System.out.println("update hit called");
         this.revalidate();
         this.repaint();
     }    
