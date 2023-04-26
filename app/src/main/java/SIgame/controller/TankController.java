@@ -17,6 +17,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
 import javax.sound.sampled.*;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
 
 public class TankController implements KeyListener, ControllerInterface
 {
@@ -60,13 +62,10 @@ public class TankController implements KeyListener, ControllerInterface
     //     gameController.addLaser(laserModel, laserView);
     // }
 
-    private void shootLaser() 
-    {
+    private void shootLaser() {
         try {
-            URL soundUrl = getClass().getResource("/resources/laser.wav");
-            System.out.println("soundUrl: " + soundUrl);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundUrl);
-            System.out.println("audioInputStream: " + audioInputStream);
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("laser.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
             DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
             Clip clip = (Clip) AudioSystem.getLine(info);
             clip.open(audioInputStream);
