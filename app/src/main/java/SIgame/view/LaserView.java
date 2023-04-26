@@ -11,7 +11,7 @@ public class LaserView extends JPanel
     public static final int HEIGHT = 10;
 
     private LaserModel laserModel;
-    private Color color;
+    public Color color;
 
     public LaserView(LaserModel laserModel, Color color) 
     {
