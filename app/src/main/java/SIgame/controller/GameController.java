@@ -85,6 +85,10 @@ public class GameController
                     scoreView.updateScore(score.getCurrentScore());
                     alienController.removeAlien(gui);
                     System.out.println("Alien collided with laser");
+                    removeLaser(laserModels.get(i), laserViews.get(i));
+                    laserModels.remove(i);
+                    laserViews.remove(i);
+                    laserControllers.remove(i);
                 }
             }
     

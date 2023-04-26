@@ -20,7 +20,7 @@ public class AlienArmada
 
     private void createArmada() 
     {
-        int rows = 1;
+        int rows = 3;
         int columns = 9;
         int alienWidth = 40;
         int alienHeight = 40;
