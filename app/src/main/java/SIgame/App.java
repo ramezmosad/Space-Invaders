@@ -14,7 +14,7 @@ public class App
 {
     public static void main(String[] args) 
     {
-        Score score = new Score();
+        ScoreModel score = new ScoreModel();
         TankModel tankModel = new TankModel(290, 420, 5);
         GameController gameController = new GameController(score);
         TankView tankView = gameController.getSpaceGUI().getTankView();

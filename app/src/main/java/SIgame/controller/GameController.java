@@ -10,25 +10,27 @@ public class GameController
 {
     private LifeModel lifeModel;
     private LifeView lifeView;
-    private Score score;
+    private ScoreModel score;
     private TankView tankView;
     private SpaceGUI gui;
     private List<LaserModel> laserModels;
     private List<LaserView> laserViews;
     private List<LaserController> laserControllers;
     private AlienArmada alienArmada;
+    private ScoreView scoreView;
 
-    public GameController(Score score) 
+    public GameController(ScoreModel score) 
     {
         this.lifeView = new LifeView(3);
         this.lifeModel = new LifeModel();
         this.score = score;
         this.tankView = new TankView();
         this.alienArmada = new AlienArmada(this);
-        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada);
         this.laserModels = new ArrayList<>();
         this.laserViews = new ArrayList<>();
         this.laserControllers = new ArrayList<>();
+        this.scoreView = new ScoreView(score);
+        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada, scoreView);
     }
 
     public void addLaser(LaserModel laserModel, LaserView laserView) 
@@ -79,6 +81,8 @@ public class GameController
             LaserController laserController = laserControllers.get(i);
             for (AlienController alienController : alienArmada.getAliens()) {
                 if (alienController.isCollision(laserController)) {
+                    score.gainPoint();
+                    scoreView.updateScore(score.getCurrentScore());
                     alienController.removeAlien(gui);
                     System.out.println("Alien collided with laser");
                 }

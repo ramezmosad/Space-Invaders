@@ -17,11 +17,12 @@ public class SpaceGUI
     AlienView alienView;
     LifeView lifeView;
     GameController controller;
-    Score score;
+    ScoreModel score;
+    ScoreView scoreView;
     AlienArmada alienArmada;
     String difficulty = "Normal"; //hard coded for now
 
-    public SpaceGUI(GameController gameController, Score score, TankView tankView, LifeView lifeView, AlienArmada alienArmada) 
+    public SpaceGUI(GameController gameController, ScoreModel score, TankView tankView, LifeView lifeView, AlienArmada alienArmada, ScoreView scoreView) 
     {
         this.controller = gameController;
         this.score = score;
@@ -29,6 +30,8 @@ public class SpaceGUI
         this.alienView = alienView;
         this.lifeView = lifeView;
         this.alienArmada = alienArmada;
+        this.scoreView = scoreView;
+
 
         gameFrame = new JFrame("Space Invaders");
         gameScreen = new JPanel();
@@ -63,10 +66,8 @@ public class SpaceGUI
         gameScreen.setPreferredSize(new Dimension(640, 480));
         gameScreen.setLayout(null);
     
-        JLabel scoreLabel = new JLabel("Score: 5");
-        scoreLabel.setForeground(Color.WHITE);
-        scoreLabel.setBounds(20, 10, 80, 30);
-        gameScreen.add(scoreLabel);
+    
+        gameScreen.add(scoreView);
     
         JLabel highScoreLabel = new JLabel("High Score: 35");
         highScoreLabel.setForeground(Color.WHITE);
