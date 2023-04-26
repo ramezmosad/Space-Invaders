@@ -40,11 +40,15 @@ public class TankModel
 
     public void moveLeft() 
     {
-        x -= speed;
+        if (getX() > 10){
+            x -= speed;
+            }
     }
 
     public void moveRight() 
     {
+        if (getX() < 580){
         x += speed;
+        }
     }
 }
