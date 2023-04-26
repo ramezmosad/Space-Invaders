@@ -12,10 +12,6 @@ import java.awt.event.KeyListener;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.net.URL;
 import javax.sound.sampled.*;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
