@@ -18,4 +18,15 @@ public class LifeModel
     {
         return lives;
     }
+
+    public boolean isGameOver()
+    {
+        boolean gameOver = false;
+        if(this.lives == 0)
+        {
+            gameOver = true;
+        }
+
+        return gameOver;
+    }
 }

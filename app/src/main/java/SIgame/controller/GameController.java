@@ -5,6 +5,9 @@ import SIgame.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.color.*;
 
@@ -133,6 +136,12 @@ public class GameController
                 lifeView.loseLife(lifeModel.getLives());
                 System.out.println("Tank collided with laser");
                 lasersToRemove.add(i);
+                if(lifeModel.isGameOver() == true)
+                {
+                    JOptionPane.showMessageDialog(null, 
+                    "Score: " + score.getCurrentScore() +"   "+ "HighScore: " + score.getHighScore(), "Game Over", JOptionPane.DEFAULT_OPTION);
+                    gui.close();
+                }
             }
         }
 

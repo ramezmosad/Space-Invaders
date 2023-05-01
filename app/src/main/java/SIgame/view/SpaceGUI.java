@@ -3,6 +3,8 @@ package SIgame.view;
 import javax.swing.*;
 import SIgame.model.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+
 import SIgame.controller.*;
 
 public class SpaceGUI
@@ -100,4 +102,9 @@ public class SpaceGUI
     public void addBarrierToGameScreen(BarrierView barrierView) {
         gameScreen.add(barrierView);
     }
+
+    public void close()
+   {
+      gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
+   }
 }

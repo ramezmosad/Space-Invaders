@@ -11,10 +11,15 @@ public class ScoreModel
 
     public void gainPoint()
     {
-        currentScore++;
+        currentScore = currentScore+10;
     }
 
     public int getCurrentScore()
+    {
+        return this.currentScore;
+    }
+
+    public int getHighScore()
     {
         return this.currentScore;
     }
