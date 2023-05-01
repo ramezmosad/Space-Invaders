@@ -12,16 +12,16 @@ public class ScoreView extends JLabel
     public ScoreView(ScoreModel score)
     {
         this.score = score;
-        scoreLabel = new JLabel("Lives: " + score.getCurrentScore());
-        scoreLabel.setForeground(Color.WHITE);
-        this.setBounds(20, 10, 80, 30);
-        setText("Score: " + score.getCurrentScore() );
+        // scoreLabel = new JLabel("Lives: " + score.getCurrentScore());
+        // scoreLabel.setForeground(Color.WHITE);
+        this.setBounds(20, 10, 160, 30);
+        setText("Score: " + score.getCurrentScore() +"  " + "High Score: " + score.getHighScore());
         setForeground(Color.WHITE);
     }
 
     public void updateScore(int score)
     {
-        setText("Score: " + score);
+        setText("Score: " + score +"  " + "High Score: " + this.score.getHighScore());
     }
 }
 

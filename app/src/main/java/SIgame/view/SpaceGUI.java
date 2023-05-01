@@ -71,10 +71,10 @@ public class SpaceGUI
     
         gameScreen.add(scoreView);
     
-        JLabel highScoreLabel = new JLabel("High Score: 35");
-        highScoreLabel.setForeground(Color.WHITE);
-        highScoreLabel.setBounds(120, 10, 100, 30);
-        gameScreen.add(highScoreLabel);
+        // JLabel highScoreLabel = new JLabel("High Score: 35");
+        // highScoreLabel.setForeground(Color.WHITE);
+        // highScoreLabel.setBounds(120, 10, 100, 30);
+        // gameScreen.add(highScoreLabel);
     
         for (AlienController alienController : alienArmada.getAliens()) {
             AlienView alienView = alienController.getAlienView();
