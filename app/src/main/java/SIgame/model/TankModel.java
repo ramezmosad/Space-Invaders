@@ -5,7 +5,6 @@ public class TankModel
     private int x;
     private int y;
     private int speed;
-    private final int increment = 3;
 
     public TankModel(int x, int y, int speed) 
     {

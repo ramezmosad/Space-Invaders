@@ -11,7 +11,10 @@ public class LifeModel
 
     public void hitByAlien()
     {
-        lives--;
+        if (lives > 0) 
+        {
+            lives--;
+        }
     }
 
     public void setLives(int lives) 

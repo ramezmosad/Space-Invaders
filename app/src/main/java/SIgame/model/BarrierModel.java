@@ -18,7 +18,10 @@ public class BarrierModel
 
     public boolean hitByLaser() 
     {
-        hitCount--;
+        if (hitCount > 0) 
+        {
+            hitCount--;
+        }
         return hitCount <= 0;
     }
 
