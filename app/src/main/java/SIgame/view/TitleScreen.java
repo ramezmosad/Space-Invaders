@@ -11,6 +11,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import SIgame.ControllerInterface;
+import SIgame.model.TankModel;
+import SIgame.view.TankView;
+import SIgame.model.LaserModel;
+import SIgame.view.LaserView;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.Timer;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
 
 
 public class TitleScreen implements KeyListener
@@ -71,6 +89,7 @@ public class TitleScreen implements KeyListener
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP)
         {
+            playSelectNoise();
             if (selectedButton == 1)
             {
                 normalLabel.setText("[ Normal ]");
@@ -79,6 +98,7 @@ public class TitleScreen implements KeyListener
             }
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN)
         {
+            playSelectNoise();
             if (selectedButton == 0)
             {
                 normalLabel.setText("Normal");
@@ -98,6 +118,7 @@ public class TitleScreen implements KeyListener
         }
     }
 
+    
 
     @Override
     public void keyReleased(KeyEvent e)
@@ -119,6 +140,23 @@ public class TitleScreen implements KeyListener
     public JFrame getMenuFrame()
     {
         return this.menuFrame;
+    }
+
+    public void playSelectNoise()
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("selection.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(audioInputStream);
+            clip.start();
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
     }
 
 
