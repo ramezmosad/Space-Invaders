@@ -39,6 +39,7 @@ public class GameController
         {
             this.alienSpeed = 1;
         }
+        this.difficulty = difficulty;
         this.lifeView = new LifeView(3);
         this.lifeModel = new LifeModel();
         this.score = score;
@@ -49,7 +50,6 @@ public class GameController
         this.laserControllers = new ArrayList<>();
         this.scoreView = new ScoreView(score);
         this.barrierViews = new ArrayList<>();
-        this.difficulty = difficulty;
         this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada, scoreView, difficulty);
         addBarriers();
         startGameLoop();
@@ -295,6 +295,11 @@ public class GameController
         alienArmada = newAlienArmada;
         aliensRegenerating = false;
 
+    }
+
+    public String getDifficulty()
+    {
+        return this.difficulty;
     }
 
     public SpaceGUI getSpaceGUI() 

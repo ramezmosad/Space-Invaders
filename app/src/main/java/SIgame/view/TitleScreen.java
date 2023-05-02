@@ -15,15 +15,12 @@ import javax.swing.JPanel;
 
 public class TitleScreen implements KeyListener
 {
-
-
     private JFrame menuFrame;
     private JPanel titleScreen;
     private JLabel normalLabel;
     private JLabel hardLabel;
     private String difficulty;
     private int selectedButton = 0;
-
 
     public void drawMainMenu()
     {
@@ -32,29 +29,38 @@ public class TitleScreen implements KeyListener
         ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JLabel image = new JLabel(logo);
+        
         titleScreen.setPreferredSize(new Dimension(640, 480));
         titleScreen.setBackground(Color.BLACK);
         titleScreen.setLayout(new BoxLayout(titleScreen, BoxLayout.PAGE_AXIS));
+
         JPanel labelPanel = new JPanel();
         labelPanel.setBackground(Color.BLACK);
         labelPanel.setLayout(new BoxLayout(labelPanel, 3));
+    
         JLabel label = new JLabel("Select Difficulty:");
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Arial", Font.BOLD, 24));
+
         normalLabel = new JLabel("[ Normal ]");
         normalLabel.setForeground(Color.WHITE);
         normalLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+
         hardLabel = new JLabel("Hard");
         hardLabel.setForeground(Color.WHITE);
         hardLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+
         labelPanel.add(label);
         labelPanel.add(normalLabel);
         labelPanel.add(hardLabel);
+
         titleScreen.add(image);
         titleScreen.add(labelPanel);
+
         menuFrame.add(titleScreen);
         menuFrame.pack();
         menuFrame.setVisible(true);
+
         titleScreen.addKeyListener(this);
         titleScreen.setFocusable(true);
         titleScreen.requestFocusInWindow();

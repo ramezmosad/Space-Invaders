@@ -20,7 +20,11 @@ public class AlienArmada
 
     private void createArmada() 
     {
-        int rows = 3;
+        int rows = 2;
+        if (this.gameController.getDifficulty().equals("Hard"))
+        {
+            rows = 3;
+        }
         int columns = 9;
         int alienWidth = 20;
         int alienHeight = 20;
