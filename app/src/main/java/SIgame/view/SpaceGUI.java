@@ -22,9 +22,9 @@ public class SpaceGUI
     ScoreModel score;
     ScoreView scoreView;
     AlienArmada alienArmada;
-    String difficulty = "Normal"; //hard coded for now
+    String difficulty;// = "Normal"; //hard coded for now
 
-    public SpaceGUI(GameController gameController, ScoreModel score, TankView tankView, LifeView lifeView, AlienArmada alienArmada, ScoreView scoreView) 
+    public SpaceGUI(GameController gameController, ScoreModel score, TankView tankView, LifeView lifeView, AlienArmada alienArmada, ScoreView scoreView, String difficulty) 
     {
         this.controller = gameController;
         this.score = score;
@@ -33,6 +33,7 @@ public class SpaceGUI
         this.lifeView = lifeView;
         this.alienArmada = alienArmada;
         this.scoreView = scoreView;
+        this.difficulty = difficulty;
 
         gameFrame = new JFrame("Space Invaders");
         gameScreen = new JPanel();

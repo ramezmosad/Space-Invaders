@@ -14,22 +14,48 @@ public class App
 {
     public static void main(String[] args) 
     {
+        TitleScreen titleScreen = new TitleScreen();
+        titleScreen.drawMainMenu();
         ScoreModel score = new ScoreModel();
         TankModel tankModel = new TankModel(290, 420, 10);
-        GameController gameController = new GameController(score);
-        TankView tankView = gameController.getSpaceGUI().getTankView();
-        TankController tankController = new TankController(tankModel, tankView, gameController);
-        gameController.setTankView(tankView);
-
-        Timer laserTimer = new Timer(15, new ActionListener() 
+        if (titleScreen.getDifficulty() != null)
         {
-            @Override
-            public void actionPerformed(ActionEvent e) 
+        if (titleScreen.getDifficulty().equals("Normal"))
+        {
+            GameController gameController = new GameController(score, "Normal");
+            TankView tankView = gameController.getSpaceGUI().getTankView();
+            TankController tankController = new TankController(tankModel, tankView, gameController);
+            gameController.setTankView(tankView);
+    
+            Timer laserTimer = new Timer(15, new ActionListener() 
             {
-                gameController.moveLasers();
-                gameController.checkForCollisions();
-            }
-        });
-        laserTimer.start();
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    gameController.moveLasers();
+                    gameController.checkForCollisions();
+                }
+            });
+            laserTimer.start();
+        }
+        else if (titleScreen.getDifficulty().equals("Hard"))
+        {
+            GameController gameController = new GameController(score, "Hard");
+            TankView tankView = gameController.getSpaceGUI().getTankView();
+            TankController tankController = new TankController(tankModel, tankView, gameController);
+            gameController.setTankView(tankView);
+    
+            Timer laserTimer = new Timer(15, new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    gameController.moveLasers();
+                    gameController.checkForCollisions();
+                }
+            });
+            laserTimer.start();
+        }
+        }
     }
 }

@@ -27,8 +27,9 @@ public class GameController
     private int alienSpeed = 1;
     private boolean aliensRegenerating = false;
     private boolean directionChanged = false;
+    private String difficulty;
 
-    public GameController(ScoreModel score) 
+    public GameController(ScoreModel score, String difficulty) 
     {
         this.lifeView = new LifeView(3);
         this.lifeModel = new LifeModel();
@@ -40,7 +41,8 @@ public class GameController
         this.laserControllers = new ArrayList<>();
         this.scoreView = new ScoreView(score);
         this.barrierViews = new ArrayList<>();
-        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada, scoreView);
+        this.difficulty = difficulty;
+        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada, scoreView, difficulty);
         addBarriers();
         startGameLoop();
     }
