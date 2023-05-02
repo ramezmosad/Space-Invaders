@@ -9,67 +9,77 @@ import SIgame.controller.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class App 
 {
     public static void main(String[] args) 
-{
-    TitleScreen titleScreen = new TitleScreen();
-    titleScreen.drawMainMenu();
-    ScoreModel score = new ScoreModel();
-    TankModel tankModel = new TankModel(290, 420, 10);
-    String difficulty = null;
-    while (difficulty == null) 
     {
-        difficulty = titleScreen.getDifficulty();
-        try 
+        TitleScreen titleScreen = new TitleScreen();
+        titleScreen.drawMainMenu();
+        ScoreModel score = new ScoreModel();
+        TankModel tankModel = new TankModel(290, 420, 10);
+        String difficulty = null;
+        while (difficulty == null) 
         {
-            Thread.sleep(100);
-        } 
-        catch (InterruptedException e) 
+            difficulty = titleScreen.getDifficulty();
+            try 
+            {
+                Thread.sleep(100);
+            } 
+            catch (InterruptedException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+
+        if (difficulty.equals("Normal"))
         {
-            e.printStackTrace();
+            GameController gameController = new GameController(score, "Normal");
+            TankView tankView = gameController.getSpaceGUI().getTankView();
+            TankController tankController = new TankController(tankModel, tankView, gameController);
+            gameController.setTankView(tankView);
+
+            Timer laserTimer = new Timer(15, new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    gameController.moveLasers();
+                    gameController.checkForCollisions();
+                }
+            });
+            laserTimer.start();
+        }
+    
+        else if (difficulty.equals("Hard"))
+        {
+            GameController gameController = new GameController(score, "Hard");
+            TankView tankView = gameController.getSpaceGUI().getTankView();
+            TankController tankController = new TankController(tankModel, tankView, gameController);
+            gameController.setTankView(tankView);
+
+            Timer laserTimer = new Timer(15, new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    gameController.moveLasers();
+                    gameController.checkForCollisions();
+                }
+            });
+            laserTimer.start();
         }
     }
-
-    if (difficulty.equals("Normal"))
-    {
-        GameController gameController = new GameController(score, "Normal");
-        TankView tankView = gameController.getSpaceGUI().getTankView();
-        TankController tankController = new TankController(tankModel, tankView, gameController);
-        gameController.setTankView(tankView);
-
-        Timer laserTimer = new Timer(15, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                gameController.moveLasers();
-                gameController.checkForCollisions();
-            }
-        });
-        laserTimer.start();
-    }
     
-    else if (difficulty.equals("Hard"))
-    {
-        GameController gameController = new GameController(score, "Hard");
-        TankView tankView = gameController.getSpaceGUI().getTankView();
-        TankController tankController = new TankController(tankModel, tankView, gameController);
-        gameController.setTankView(tankView);
-
-        Timer laserTimer = new Timer(15, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                gameController.moveLasers();
-                gameController.checkForCollisions();
-            }
-        });
-        laserTimer.start();
-    }
-}
-
-
 }

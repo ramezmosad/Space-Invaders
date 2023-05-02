@@ -4,8 +4,6 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 
-
-
 public class LifeView extends JLabel
 {
     private JLabel livesLabel;
