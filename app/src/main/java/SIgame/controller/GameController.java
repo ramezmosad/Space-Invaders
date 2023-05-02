@@ -183,7 +183,7 @@ public class GameController
     public void moveAliens() 
     {
         if (aliensRegenerating) return;
-    
+
         boolean changeDirection = false;
         boolean moveDown = false;
         for (AlienController alienController : alienArmada.getAliens()) 
@@ -274,6 +274,8 @@ public class GameController
             AlienView alienView = alienController.getAlienView();
             AlienModel alienModel = alienController.getAlienModel();
             alienView.setBounds(alienModel.getX(), alienModel.getY(), 40, 40);
+            this.lifeModel.setLives(3);
+            this.lifeView.setLives(3);
             gui.getGameScreen().add(alienView);
             gui.getGameScreen().revalidate();
             gui.getGameScreen().repaint();
@@ -281,6 +283,7 @@ public class GameController
         }
         alienArmada = newAlienArmada;
         aliensRegenerating = false;
+
     }
 
     public SpaceGUI getSpaceGUI() 

@@ -9,8 +9,6 @@ public class LifeView extends JLabel
 
     public LifeView(int numOfLives)
     {
-        livesLabel = new JLabel("Lives: " + numOfLives);
-        livesLabel.setForeground(Color.WHITE);
         this.setBounds(250, 10, 80, 30);
         setText("Lives: " + numOfLives);
         setForeground(Color.WHITE);
@@ -18,6 +16,11 @@ public class LifeView extends JLabel
 
     public void loseLife(int numOfLives)
     {
-        this.setText("Lives: " + numOfLives);
+        setText("Lives: " + numOfLives);
+    }
+
+    public void setLives(int numOfLives)
+    {
+        setText("Lives: " + numOfLives);
     }
 }
