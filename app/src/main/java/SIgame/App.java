@@ -50,6 +50,7 @@ public class App
         });
         laserTimer.start();
     }
+    
     else if (difficulty.equals("Hard"))
     {
         GameController gameController = new GameController(score, "Hard");

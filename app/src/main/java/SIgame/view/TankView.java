@@ -22,7 +22,7 @@ public class TankView extends JLabel
 
     public boolean isCollision(LaserController laserController) 
     {
-        final int MARGIN = 1;
+        final int MARGIN = 0;
         
         LaserModel laserModel = laserController.getLaserModel();
         int laserX = laserModel.getX();
@@ -30,8 +30,8 @@ public class TankView extends JLabel
         int laserWidth = LaserView.WIDTH;
         int laserHeight = LaserView.HEIGHT;
     
-        int tankX = getX();
-        int tankY = getY();
+        int tankX = getX() + 30;
+        int tankY = getY() + 30;
         int tankWidth = 60;
         int tankHeight = 60;
     

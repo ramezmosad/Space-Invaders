@@ -24,13 +24,21 @@ public class GameController
     private List<BarrierView> barrierViews;
     private AlienArmada alienArmada;
     private ScoreView scoreView;
-    private int alienSpeed = 1;
+    private int alienSpeed;
     private boolean aliensRegenerating = false;
     private boolean directionChanged = false;
     private String difficulty;
 
     public GameController(ScoreModel score, String difficulty) 
     {
+        if (difficulty.equals("Hard"))
+        {
+            this.alienSpeed = 3;
+        }
+        else
+        {
+            this.alienSpeed = 1;
+        }
         this.lifeView = new LifeView(3);
         this.lifeModel = new LifeModel();
         this.score = score;
@@ -274,8 +282,11 @@ public class GameController
             AlienView alienView = alienController.getAlienView();
             AlienModel alienModel = alienController.getAlienModel();
             alienView.setBounds(alienModel.getX(), alienModel.getY(), 40, 40);
-            this.lifeModel.setLives(3);
-            this.lifeView.setLives(3);
+            if (this.difficulty.equals("Normal"))
+            {
+                this.lifeModel.setLives(3);
+                this.lifeView.setLives(3);
+            }
             gui.getGameScreen().add(alienView);
             gui.getGameScreen().revalidate();
             gui.getGameScreen().repaint();
