@@ -6,10 +6,9 @@ import SIgame.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
+import javax.swing.*;
 import java.awt.Color;
-import java.awt.color.*;
+import java.awt.event.*;
 
 public class GameController 
 {
@@ -17,6 +16,7 @@ public class GameController
     private LifeView lifeView;
     private ScoreModel score;
     private TankView tankView;
+    private TankController tankController;
     private SpaceGUI gui;
     private List<LaserModel> laserModels;
     private List<LaserView> laserViews;
@@ -24,6 +24,8 @@ public class GameController
     private List<BarrierView> barrierViews;
     private AlienArmada alienArmada;
     private ScoreView scoreView;
+    private int alienSpeed = 1;
+    private boolean aliensRegenerating = false;
 
     public GameController(ScoreModel score) 
     {
@@ -37,8 +39,9 @@ public class GameController
         this.laserControllers = new ArrayList<>();
         this.scoreView = new ScoreView(score);
         this.barrierViews = new ArrayList<>();
-        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada, scoreView); // Move this line before addBarriers()
+        this.gui = new SpaceGUI(this, score, this.tankView, lifeView, alienArmada, scoreView);
         addBarriers();
+        startGameLoop();
     }
     
 
@@ -97,6 +100,7 @@ public class GameController
                 {
                     score.gainPoint();
                     scoreView.updateScore(score.getCurrentScore());
+                    alienArmada.removeAlien(alienController);
                     alienController.removeAlien(gui);
                     System.out.println("Alien collided with laser");
                     lasersToRemove.add(i);
@@ -116,21 +120,21 @@ public class GameController
                 {
                     lasersToRemove.add(i);
     
-                        barrierView.getBarrierModel().hitByLaser();
-                        barrierView.updateHitCountLabel(barrierView.getBarrierModel().getHitCount());
-                        if (barrierModel.getHitCount() <= 0) 
-                        {
+                    barrierView.getBarrierModel().hitByLaser();
+                    barrierView.updateHitCountLabel(barrierView.getBarrierModel().getHitCount());
+                    if (barrierModel.getHitCount() <= 0) 
+                    {
                         gui.getGameScreen().remove(barrierView);
                         gui.getGameScreen().revalidate();
                         gui.getGameScreen().repaint();
                         barrierViews.remove(j);
-                        }
+                    }
                     
                     break;
                 }
             }
 
-            if (tankView.isCollision(laserController)) 
+            if (tankView.isCollision(laserController) && !laserController.isRed) 
             {
                 lifeModel.hitByAlien();
                 lifeView.loseLife(lifeModel.getLives());
@@ -153,6 +157,7 @@ public class GameController
             laserViews.remove(index);
             laserControllers.remove(index);
         }
+        
     }
     
 
@@ -174,6 +179,102 @@ public class GameController
         }
     }
 
+    public void moveAliens() 
+    {
+        if (aliensRegenerating) return;
+
+        boolean changeDirection = false;
+        boolean moveDown = false;
+        for (AlienController alienController : alienArmada.getAliens()) 
+        {
+            AlienModel alienModel = alienController.getAlienModel();
+            AlienView alienView = alienController.getAlienView();
+
+            if (!changeDirection && (alienModel.getX() <= 0 || alienModel.getX() + 40 >= gui.getGameScreen().getWidth())) 
+            {
+                changeDirection = true;
+                moveDown = true;
+            }
+        }
+
+        for (AlienController alienController : alienArmada.getAliens()) 
+        {
+            AlienModel alienModel = alienController.getAlienModel();
+            AlienView alienView = alienController.getAlienView();
+
+            if (changeDirection) 
+            {
+                alienModel.setX(alienModel.getX() - alienSpeed);
+            } 
+            else 
+            {
+                alienModel.setX(alienModel.getX() + alienSpeed);
+            }
+
+            if (moveDown) 
+            {
+                alienModel.setY(alienModel.getY() + 40);
+            }
+
+            alienView.setLocation(alienModel.getX(), alienModel.getY());
+
+            if (alienModel.getY() >= tankView.getY() - 40) 
+            {
+                JOptionPane.showMessageDialog(null, "Game Over: Aliens have reached your tank! Score: " + score.getCurrentScore() + ", HighScore: " + score.getHighScore(), "Game Over", JOptionPane.DEFAULT_OPTION);
+                gui.close();
+            }
+        }
+
+        if (changeDirection) 
+        {
+            alienSpeed = -alienSpeed;
+        }
+    }
+
+    public void startGameLoop() 
+    {
+        int delay = 50;
+    
+        ActionListener gameLoop = new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                if (alienArmada.getAliens().isEmpty() && !aliensRegenerating) 
+                {
+                    regenerateAliens();
+                }
+                moveAliens();
+                checkForCollisions();
+                moveLasers();
+            }
+        };
+    
+        Timer timer = new Timer(delay, gameLoop);
+        timer.start();
+    }    
+
+    public void regenerateAliens() 
+    {
+        aliensRegenerating = true;
+        alienSpeed++;
+        alienArmada.resetAliens();
+        AlienArmada newAlienArmada = new AlienArmada(this);
+        for (AlienController alienController : newAlienArmada.getAliens()) 
+        {
+            AlienView alienView = alienController.getAlienView();
+            AlienModel alienModel = alienController.getAlienModel();
+            alienView.setBounds(alienModel.getX(), alienModel.getY(), 40, 40);
+            gui.getGameScreen().add(alienView);
+            gui.getGameScreen().revalidate();
+            gui.getGameScreen().repaint();
+            alienArmada.addAlien(alienController);
+        }
+        alienArmada = newAlienArmada;
+        aliensRegenerating = false;
+    }
+    
+
     public SpaceGUI getSpaceGUI() 
     {
         return gui;
@@ -183,4 +284,10 @@ public class GameController
     {
         this.tankView = tankView;
     }
+
+    public void setAlienArmada(AlienArmada alienArmada) 
+    {
+        this.alienArmada = alienArmada;
+    }
+    
 }

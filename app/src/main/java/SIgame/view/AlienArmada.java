@@ -25,7 +25,7 @@ public class AlienArmada
         int alienWidth = 20;
         int alienHeight = 20;
         int horizontalSpacing = 40;
-        int verticalSpacing = 10;
+        int verticalSpacing = 20;
 
         for (int i = 0; i < rows; i++) 
         {
@@ -44,5 +44,20 @@ public class AlienArmada
     public ArrayList<AlienController> getAliens() 
     {
         return aliens;
+    }
+
+    public void resetAliens()
+    {
+        aliens.clear();
+    }
+
+    public void addAlien(AlienController alienController) 
+    {
+        aliens.add(alienController);
+    }
+
+    public void removeAlien(AlienController alienController) 
+    {
+        aliens.remove(alienController);
     }
 }

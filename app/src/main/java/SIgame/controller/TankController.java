@@ -51,13 +51,6 @@ public class TankController implements KeyListener, ControllerInterface
         this.gameController = gameController;
     }
 
-    // private void shootLaser() 
-    // {
-    //     LaserModel laserModel = new LaserModel(model.getX() + 30, model.getY() - 10, 5);
-    //     LaserView laserView = new LaserView(laserModel, Color.RED);
-    //     gameController.addLaser(laserModel, laserView);
-    // }
-
     private void shootLaser() 
     {
         try 
@@ -68,7 +61,9 @@ public class TankController implements KeyListener, ControllerInterface
             Clip clip = (Clip) AudioSystem.getLine(info);
             clip.open(audioInputStream);
             clip.start();
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
             ex.printStackTrace();
         }
         LaserModel laserModel = new LaserModel(model.getX() + 30, model.getY() - 10, 5);

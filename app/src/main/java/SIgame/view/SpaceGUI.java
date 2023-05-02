@@ -34,7 +34,6 @@ public class SpaceGUI
         this.alienArmada = alienArmada;
         this.scoreView = scoreView;
 
-
         gameFrame = new JFrame("Space Invaders");
         gameScreen = new JPanel();
 
@@ -71,12 +70,8 @@ public class SpaceGUI
     
         gameScreen.add(scoreView);
     
-        // JLabel highScoreLabel = new JLabel("High Score: 35");
-        // highScoreLabel.setForeground(Color.WHITE);
-        // highScoreLabel.setBounds(120, 10, 100, 30);
-        // gameScreen.add(highScoreLabel);
-    
-        for (AlienController alienController : alienArmada.getAliens()) {
+        for (AlienController alienController : alienArmada.getAliens()) 
+        {
             AlienView alienView = alienController.getAlienView();
             AlienModel alienModel = alienController.getAlienModel();
             alienView.setBounds(alienModel.getX(), alienModel.getY(), 40, 40);
@@ -85,7 +80,7 @@ public class SpaceGUI
     
         gameScreen.add(this.lifeView);
         gameScreen.add(tankVieww);
-    
+
         gameFrame.add(gameScreen);
         gameFrame.pack();
         gameFrame.setVisible(true);
@@ -99,12 +94,13 @@ public class SpaceGUI
         gameScreen.repaint();
     }
     
-    public void addBarrierToGameScreen(BarrierView barrierView) {
+    public void addBarrierToGameScreen(BarrierView barrierView) 
+    {
         gameScreen.add(barrierView);
     }
 
     public void close()
-   {
-      gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
-   }
+    {
+        gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
+    }
 }
