@@ -26,6 +26,7 @@ public class GameController
     private ScoreView scoreView;
     private int alienSpeed = 1;
     private boolean aliensRegenerating = false;
+    private boolean directionChanged = false;
 
     public GameController(ScoreModel score) 
     {
@@ -182,26 +183,26 @@ public class GameController
     public void moveAliens() 
     {
         if (aliensRegenerating) return;
-
+    
         boolean changeDirection = false;
         boolean moveDown = false;
         for (AlienController alienController : alienArmada.getAliens()) 
         {
             AlienModel alienModel = alienController.getAlienModel();
             AlienView alienView = alienController.getAlienView();
-
+    
             if (!changeDirection && (alienModel.getX() <= 0 || alienModel.getX() + 40 >= gui.getGameScreen().getWidth())) 
             {
                 changeDirection = true;
                 moveDown = true;
             }
         }
-
+    
         for (AlienController alienController : alienArmada.getAliens()) 
         {
             AlienModel alienModel = alienController.getAlienModel();
             AlienView alienView = alienController.getAlienView();
-
+    
             if (changeDirection) 
             {
                 alienModel.setX(alienModel.getX() - alienSpeed);
@@ -210,26 +211,28 @@ public class GameController
             {
                 alienModel.setX(alienModel.getX() + alienSpeed);
             }
-
+    
             if (moveDown) 
             {
                 alienModel.setY(alienModel.getY() + 40);
             }
-
+    
             alienView.setLocation(alienModel.getX(), alienModel.getY());
-
+    
             if (alienModel.getY() >= tankView.getY() - 40) 
             {
                 JOptionPane.showMessageDialog(null, "Game Over: Aliens have reached your tank! Score: " + score.getCurrentScore() + ", HighScore: " + score.getHighScore(), "Game Over", JOptionPane.DEFAULT_OPTION);
                 gui.close();
             }
         }
-
+    
         if (changeDirection) 
         {
             alienSpeed = -alienSpeed;
+            directionChanged = !directionChanged;
         }
-    }
+    }    
+    
 
     public void startGameLoop() 
     {
@@ -257,7 +260,6 @@ public class GameController
     public void regenerateAliens() 
     {
         aliensRegenerating = true;
-        alienSpeed++;
         alienArmada.resetAliens();
         AlienArmada newAlienArmada = new AlienArmada(this);
         for (AlienController alienController : newAlienArmada.getAliens()) 

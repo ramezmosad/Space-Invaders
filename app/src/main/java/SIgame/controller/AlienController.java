@@ -16,6 +16,7 @@ public class AlienController
     private GameController gameController;
     private Timer shootingTimer;
     private ArrayList<Integer> timeIntervals;
+    private int speed;
 
     public AlienController(AlienModel alienModel, AlienView alienView, GameController gameController, boolean doesShoot) 
     {
@@ -94,4 +95,9 @@ public class AlienController
     {
         return this.alienModel;
     }    
+
+    public void setSpeed(int speed) 
+    {
+        this.speed = speed;
+    }
 }

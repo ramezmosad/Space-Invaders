@@ -60,4 +60,12 @@ public class AlienArmada
     {
         aliens.remove(alienController);
     }
+
+    public void setAlienSpeed(int speed) 
+    {
+        for (AlienController alienController : aliens) 
+        {
+            alienController.setSpeed(speed);
+        }
+    }
 }
