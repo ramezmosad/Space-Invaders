@@ -86,6 +86,28 @@ public class AlienController
         spaceGUI.getGameScreen().repaint();
     }
 
+    public void enableShooting() 
+    {
+        if (shootingTimer == null) 
+        {
+            Random random = new Random();
+            int randomTimeInterval = timeIntervals.get(random.nextInt(timeIntervals.size()));
+    
+            shootingTimer = new Timer(randomTimeInterval, new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    if (!isHit) 
+                    {
+                        shootLaser();
+                    }
+                }
+            });
+            shootingTimer.start();
+        }
+    }
+    
     public AlienView getAlienView()
     {
         return this.alienView;

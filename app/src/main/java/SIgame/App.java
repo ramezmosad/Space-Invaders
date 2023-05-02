@@ -19,11 +19,15 @@ public class App
     ScoreModel score = new ScoreModel();
     TankModel tankModel = new TankModel(290, 420, 10);
     String difficulty = null;
-    while (difficulty == null) {
+    while (difficulty == null) 
+    {
         difficulty = titleScreen.getDifficulty();
-        try {
-            Thread.sleep(100); // wait for user input
-        } catch (InterruptedException e) {
+        try 
+        {
+            Thread.sleep(100);
+        } 
+        catch (InterruptedException e) 
+        {
             e.printStackTrace();
         }
     }

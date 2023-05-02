@@ -35,7 +35,8 @@ public class AlienArmada
                 int y = 50 + (i * (alienHeight + verticalSpacing));
                 AlienModel alienModel = new AlienModel(x, y);
                 AlienView alienView = new AlienView(0);
-                AlienController alienController = new AlienController(alienModel, alienView, gameController, true);
+                boolean doesShoot = (i == 0);
+                AlienController alienController = new AlienController(alienModel, alienView, gameController, doesShoot);
                 aliens.add(alienController);
             }
         }
@@ -45,6 +46,20 @@ public class AlienArmada
     {
         return aliens;
     }
+
+    public void updateShootingAliens(AlienController removedAlien) 
+    {
+        int columns = 9;
+        int indexOfRemovedAlien = aliens.indexOf(removedAlien);
+        int alienBelowIndex = indexOfRemovedAlien + columns;
+    
+        if (alienBelowIndex < aliens.size()) 
+        {
+            AlienController alienBelow = aliens.get(alienBelowIndex);
+            alienBelow.enableShooting();
+        }
+    }
+    
 
     public void resetAliens()
     {
@@ -59,6 +74,7 @@ public class AlienArmada
     public void removeAlien(AlienController alienController) 
     {
         aliens.remove(alienController);
+        updateShootingAliens(alienController);
     }
 
     public void setAlienSpeed(int speed) 
