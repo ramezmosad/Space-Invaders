@@ -259,7 +259,14 @@ public class GameController
 
     public void regenerateAliens() 
     {
+        final int alienSpeedIncrement = 1;
         aliensRegenerating = true;
+        if (directionChanged) 
+        {
+            alienSpeed = -alienSpeed;
+            directionChanged = false;
+        }
+        alienSpeed += alienSpeedIncrement;
         alienArmada.resetAliens();
         AlienArmada newAlienArmada = new AlienArmada(this);
         for (AlienController alienController : newAlienArmada.getAliens()) 
@@ -275,7 +282,6 @@ public class GameController
         alienArmada = newAlienArmada;
         aliensRegenerating = false;
     }
-    
 
     public SpaceGUI getSpaceGUI() 
     {
