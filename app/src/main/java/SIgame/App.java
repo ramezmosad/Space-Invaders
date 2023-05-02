@@ -13,49 +13,58 @@ import java.awt.event.ActionListener;
 public class App 
 {
     public static void main(String[] args) 
-    {
-        TitleScreen titleScreen = new TitleScreen();
-        titleScreen.drawMainMenu();
-        ScoreModel score = new ScoreModel();
-        TankModel tankModel = new TankModel(290, 420, 10);
-        if (titleScreen.getDifficulty() != null)
-        {
-        if (titleScreen.getDifficulty().equals("Normal"))
-        {
-            GameController gameController = new GameController(score, "Normal");
-            TankView tankView = gameController.getSpaceGUI().getTankView();
-            TankController tankController = new TankController(tankModel, tankView, gameController);
-            gameController.setTankView(tankView);
-    
-            Timer laserTimer = new Timer(15, new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent e) 
-                {
-                    gameController.moveLasers();
-                    gameController.checkForCollisions();
-                }
-            });
-            laserTimer.start();
-        }
-        else if (titleScreen.getDifficulty().equals("Hard"))
-        {
-            GameController gameController = new GameController(score, "Hard");
-            TankView tankView = gameController.getSpaceGUI().getTankView();
-            TankController tankController = new TankController(tankModel, tankView, gameController);
-            gameController.setTankView(tankView);
-    
-            Timer laserTimer = new Timer(15, new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent e) 
-                {
-                    gameController.moveLasers();
-                    gameController.checkForCollisions();
-                }
-            });
-            laserTimer.start();
-        }
+{
+    TitleScreen titleScreen = new TitleScreen();
+    titleScreen.drawMainMenu();
+    ScoreModel score = new ScoreModel();
+    TankModel tankModel = new TankModel(290, 420, 10);
+    String difficulty = null;
+    while (difficulty == null) {
+        difficulty = titleScreen.getDifficulty();
+        try {
+            Thread.sleep(100); // wait for user input
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
+
+    if (difficulty.equals("Normal"))
+    {
+        GameController gameController = new GameController(score, "Normal");
+        TankView tankView = gameController.getSpaceGUI().getTankView();
+        TankController tankController = new TankController(tankModel, tankView, gameController);
+        gameController.setTankView(tankView);
+
+        Timer laserTimer = new Timer(15, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                gameController.moveLasers();
+                gameController.checkForCollisions();
+            }
+        });
+        laserTimer.start();
+    }
+    else if (difficulty.equals("Hard"))
+    {
+        GameController gameController = new GameController(score, "Hard");
+        TankView tankView = gameController.getSpaceGUI().getTankView();
+        TankController tankController = new TankController(tankModel, tankView, gameController);
+        gameController.setTankView(tankView);
+
+        Timer laserTimer = new Timer(15, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                gameController.moveLasers();
+                gameController.checkForCollisions();
+            }
+        });
+        laserTimer.start();
+    }
+}
+
+
 }
