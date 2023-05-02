@@ -229,6 +229,7 @@ public class GameController
     
             if (alienModel.getY() >= tankView.getY() - 40) 
             {
+                lifeModel.playGameOverNoise();
                 JOptionPane.showMessageDialog(null, "Game Over: Aliens have reached your tank! Score: " + score.getCurrentScore() + ", HighScore: " + score.getHighScore(), "Game Over", JOptionPane.DEFAULT_OPTION);
                 gui.close();
             }
