@@ -57,6 +57,7 @@ public class TitleScreen implements KeyListener
         menuFrame.setVisible(true);
         titleScreen.addKeyListener(this);
         titleScreen.setFocusable(true);
+        titleScreen.requestFocusInWindow();
     }
 
 
