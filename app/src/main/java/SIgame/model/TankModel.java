@@ -5,6 +5,7 @@ public class TankModel
     private int x;
     private int y;
     private int speed;
+    private final int increment = 3;
 
     public TankModel(int x, int y, int speed) 
     {
@@ -40,15 +41,17 @@ public class TankModel
 
     public void moveLeft() 
     {
-        if (getX() > 0){
+        if (getX() > 0)
+        {
             x -= speed;
-            }
+        }
     }
 
     public void moveRight() 
     {
-        if (getX() < 580){
-        x += speed;
+        if (getX() < 580)
+        {
+            x += speed;
         }
     }
 }

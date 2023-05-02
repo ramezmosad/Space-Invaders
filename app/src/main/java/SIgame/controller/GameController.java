@@ -44,7 +44,6 @@ public class GameController
         addBarriers();
         startGameLoop();
     }
-    
 
     public void addLaser(LaserModel laserModel, LaserView laserView) 
     {
@@ -160,7 +159,6 @@ public class GameController
         }
         
     }
-    
 
     private void addBarriers() 
     {

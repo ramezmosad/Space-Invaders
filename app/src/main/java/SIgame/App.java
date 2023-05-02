@@ -15,13 +15,13 @@ public class App
     public static void main(String[] args) 
     {
         ScoreModel score = new ScoreModel();
-        TankModel tankModel = new TankModel(290, 420, 5);
+        TankModel tankModel = new TankModel(290, 420, 10);
         GameController gameController = new GameController(score);
         TankView tankView = gameController.getSpaceGUI().getTankView();
         TankController tankController = new TankController(tankModel, tankView, gameController);
         gameController.setTankView(tankView);
 
-        Timer laserTimer = new Timer(10, new ActionListener() 
+        Timer laserTimer = new Timer(15, new ActionListener() 
         {
             @Override
             public void actionPerformed(ActionEvent e) 

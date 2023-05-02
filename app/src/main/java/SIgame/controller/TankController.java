@@ -7,30 +7,37 @@ import SIgame.model.LaserModel;
 import SIgame.view.LaserView;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.Timer;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.*;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
 
-public class TankController implements KeyListener, ControllerInterface
+public class TankController implements KeyListener, ControllerInterface, ActionListener
 {
     private TankModel model;
     private TankView view;
     private GameController gameController;
+    private Timer leftTimer;
+    private Timer rightTimer;
     
     public TankController(TankModel model, TankView view, GameController gameController) 
     {
         this.model = model;
-        model.setSpeed(15);
+        model.setSpeed(3);
         this.view = view;
         this.gameController = gameController;
         view.addKeyListener(this);
         view.setFocusable(true);
         view.requestFocusInWindow();
+        leftTimer = new Timer(10, this);
+        rightTimer = new Timer(10, this);
     }
 
     public void setTankView(TankView view) 
@@ -98,10 +105,14 @@ public class TankController implements KeyListener, ControllerInterface
         switch (keyCode) 
         {
             case KeyEvent.VK_LEFT:
-                model.moveLeft();
+                if (!leftTimer.isRunning()) {
+                    leftTimer.start();
+                }
                 break;
             case KeyEvent.VK_RIGHT:
-                model.moveRight();
+                if (!rightTimer.isRunning()) {
+                    rightTimer.start();
+                }
                 break;
             case KeyEvent.VK_SPACE:
                 shootLaser();
@@ -111,9 +122,32 @@ public class TankController implements KeyListener, ControllerInterface
     }
 
     @Override
-    public void keyTyped(KeyEvent e){}
+    public void keyReleased(KeyEvent e)
+    {
+        int keyCode = e.getKeyCode();
+        switch (keyCode)
+        {
+            case KeyEvent.VK_LEFT:
+                leftTimer.stop();
+                break;
+            case KeyEvent.VK_RIGHT:
+                rightTimer.stop();
+                break;
+        }
+    }
 
     @Override
-    public void keyReleased(KeyEvent e){}  
-    
+    public void actionPerformed(ActionEvent e) 
+    {
+        if (e.getSource() == leftTimer) {
+            model.moveLeft();
+        } else if (e.getSource() == rightTimer) {
+            model.moveRight();
+        }
+        updateView();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e){}
 }
+
