@@ -57,10 +57,10 @@ public class AlienController
             int laserWidth = LaserView.WIDTH;
             int laserHeight = LaserView.HEIGHT;
 
-            int alienX = alienModel.getX();
+            int alienX = alienModel.getX()+5;
             int alienY = alienModel.getY();
-            int alienWidth = 40;
-            int alienHeight = 40;
+            int alienWidth = 35;
+            int alienHeight = 30;
 
             boolean xOverlap = (laserX + laserWidth + MARGIN >= alienX) && (laserX - MARGIN <= alienX + alienWidth);
             boolean yOverlap = (laserY + laserHeight + MARGIN >= alienY) && (laserY - MARGIN <= alienY + alienHeight);

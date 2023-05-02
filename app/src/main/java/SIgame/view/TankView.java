@@ -26,14 +26,14 @@ public class TankView extends JLabel
         
         LaserModel laserModel = laserController.getLaserModel();
         int laserX = laserModel.getX();
-        int laserY = laserModel.getY();
+        int laserY = laserModel.getY()+10;
         int laserWidth = LaserView.WIDTH;
         int laserHeight = LaserView.HEIGHT;
     
-        int tankX = getX() + 30;
-        int tankY = getY() + 30;
-        int tankWidth = 60;
-        int tankHeight = 60;
+        int tankX = getX() + 15;
+        int tankY = getY() + 20;
+        int tankWidth = 33;
+        int tankHeight = 70;
     
         boolean xOverlap = (laserX + laserWidth + MARGIN >= tankX) && (laserX - MARGIN <= tankX + tankWidth);
         boolean yOverlap = (laserY + laserHeight + MARGIN >= tankY) && (laserY - MARGIN <= tankY + tankHeight);
