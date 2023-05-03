@@ -3,6 +3,11 @@ package SIgame.view;
 import SIgame.controller.AlienController;
 import SIgame.controller.GameController;
 import SIgame.model.AlienModel;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
 
 import java.util.ArrayList;
 
@@ -78,6 +83,7 @@ public class AlienArmada
     {
         aliens.remove(alienController);
         updateShootingAliens(alienController);
+        playAlienHitNoise();
     }
 
     public void setAlienSpeed(int speed) 
@@ -85,6 +91,23 @@ public class AlienArmada
         for (AlienController alienController : aliens) 
         {
             alienController.setSpeed(speed);
+        }
+    }
+
+    public void playAlienHitNoise()
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("alienhit.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(audioInputStream);
+            clip.start();
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
         }
     }
 }
