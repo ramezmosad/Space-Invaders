@@ -2,7 +2,6 @@ package SIgame.controller;
 
 import SIgame.model.LaserModel;
 import SIgame.view.LaserView;
-import javax.swing.*;
 import java.awt.*;
 
 public class LaserController 

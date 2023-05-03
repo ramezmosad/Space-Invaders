@@ -6,9 +6,15 @@ import SIgame.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.*;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 
 public class GameController 
 {
@@ -16,7 +22,6 @@ public class GameController
     private LifeView lifeView;
     private ScoreModel score;
     private TankView tankView;
-    private TankController tankController;
     private SpaceGUI gui;
     private List<LaserModel> laserModels;
     private List<LaserView> laserViews;
@@ -40,6 +45,7 @@ public class GameController
             this.alienSpeed = 1;
         }
         this.difficulty = difficulty;
+        playBackgroundMusic();
         this.lifeView = new LifeView(3);
         this.lifeModel = new LifeModel();
         this.score = score;
@@ -229,6 +235,7 @@ public class GameController
     
             if (alienModel.getY() >= tankView.getY() - 40) 
             {
+                lifeModel.playGameOverNoise();
                 JOptionPane.showMessageDialog(null, "Game Over: Aliens have reached your tank! Score: " + score.getCurrentScore() + ", HighScore: " + score.getHighScore(), "Game Over", JOptionPane.DEFAULT_OPTION);
                 gui.close();
             }
@@ -241,7 +248,6 @@ public class GameController
         }
     }    
     
-
     public void startGameLoop() 
     {
         int delay = 50;
@@ -294,7 +300,23 @@ public class GameController
         }
         alienArmada = newAlienArmada;
         aliensRegenerating = false;
+    }
 
+    private void playBackgroundMusic() 
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("arcade-music-loop.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
     }
 
     public String getDifficulty()

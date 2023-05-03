@@ -60,15 +60,12 @@ public class SpaceGUI
 
     public void drawGameScreen(String difficulty, TankView tankVieww) 
     {
-        int alienStartX = 50;
         gameFrame = new JFrame(difficulty);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
         gameScreen.setBackground(Color.BLACK);
         gameScreen.setPreferredSize(new Dimension(640, 480));
         gameScreen.setLayout(null);
-    
-    
         gameScreen.add(scoreView);
     
         for (AlienController alienController : alienArmada.getAliens()) 

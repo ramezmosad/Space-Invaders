@@ -5,13 +5,18 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
+
+import java.io.InputStream;
+import java.io.BufferedInputStream;
 
 public class TitleScreen implements KeyListener
 {
@@ -66,50 +71,42 @@ public class TitleScreen implements KeyListener
         titleScreen.requestFocusInWindow();
     }
 
-
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) 
+    {
         if (e.getKeyCode() == KeyEvent.VK_UP)
         {
+            playSelectNoise();
             if (selectedButton == 1)
             {
                 normalLabel.setText("[ Normal ]");
                 hardLabel.setText("Hard");
                 selectedButton = 0;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        } 
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
         {
+            playSelectNoise();
             if (selectedButton == 0)
             {
                 normalLabel.setText("Normal");
                 hardLabel.setText("[ Hard ]");
                 selectedButton = 1;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        } 
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
         {
             if (selectedButton == 0)
             {
                 difficulty = "Normal";
-            } else
+            } 
+            else
             {
                 difficulty = "Hard";
             }
             menuFrame.dispose();
         }
     }
-
-
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-    }
-
-
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-    }
-
 
     public String getDifficulty()
     {
@@ -121,5 +118,30 @@ public class TitleScreen implements KeyListener
         return this.menuFrame;
     }
 
+    public void playSelectNoise()
+    {
+        try 
+        {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("selection.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
+            DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(audioInputStream);
+            clip.start();
+        } 
+        catch (Exception ex) 
+        {
+            ex.printStackTrace();
+        }
+    }
 
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+    }
 }

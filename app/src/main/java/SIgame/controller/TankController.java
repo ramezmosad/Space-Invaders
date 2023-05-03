@@ -78,13 +78,12 @@ public class TankController implements KeyListener, ControllerInterface, ActionL
         gameController.addLaser(laserModel, laserView);
     }
     
-    
-
     @Override
     public void handleInput(KeyEvent e) 
     {
         int keyCode = e.getKeyCode();
-        switch(keyCode) {
+        switch(keyCode) 
+        {
             case KeyEvent.VK_LEFT:
                 model.moveLeft();
                 break;
@@ -139,9 +138,12 @@ public class TankController implements KeyListener, ControllerInterface, ActionL
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        if (e.getSource() == leftTimer) {
+        if (e.getSource() == leftTimer) 
+        {
             model.moveLeft();
-        } else if (e.getSource() == rightTimer) {
+        } 
+        else if (e.getSource() == rightTimer) 
+        {
             model.moveRight();
         }
         updateView();

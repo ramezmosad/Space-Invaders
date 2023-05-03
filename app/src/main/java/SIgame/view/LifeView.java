@@ -1,7 +1,8 @@
 package SIgame.view;
 
 import javax.swing.JLabel;
-import java.awt.*;
+
+import java.awt.Color;
 
 public class LifeView extends JLabel
 {
@@ -23,4 +24,5 @@ public class LifeView extends JLabel
     {
         setText("Lives: " + numOfLives);
     }
+
 }
