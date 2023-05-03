@@ -3,10 +3,6 @@ package SIgame.model;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.JOptionPane;
-
-import SIgame.controller.GameController;
-
 import javax.sound.sampled.*;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
@@ -20,26 +16,18 @@ public class LifeModel
         this.lives = 3;
     }
 
-    public void hitByAlien(GameController gameController) {
-        if (lives > 1) 
+    public void hitByAlien()
+    {
+        if (lives > 1)
         {
             playLifeLostNoise();
         }
-
         if (lives > 0) 
         {
             lives--;
         }
-    
-        if (isGameOver()) 
-        {
-            playGameOverNoise();
-            JOptionPane.showMessageDialog(null,
-                    "Score: " + gameController.getScoreModel().getCurrentScore() + "   " + "HighScore: " + gameController.getScoreModel().getHighScore(),
-                    "Game Over", JOptionPane.DEFAULT_OPTION);
-            gameController.gameOver();
-        }
-    }    
+
+    }
 
     public void setLives(int lives) 
     {
@@ -53,7 +41,13 @@ public class LifeModel
 
     public boolean isGameOver()
     {
-        return this.lives == 0;
+        boolean gameOver = false;
+        if(this.lives == 0)
+        {
+            gameOver = true;
+            playGameOverNoise();
+        }
+        return gameOver;
     }
 
     public void playGameOverNoise()

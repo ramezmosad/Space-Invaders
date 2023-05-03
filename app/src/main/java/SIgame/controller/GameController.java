@@ -10,13 +10,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-
 import javax.swing.*;
-
 import java.awt.Color;
 import java.awt.event.*;
-import java.awt.EventQueue;
-
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 
@@ -38,7 +34,6 @@ public class GameController
     private boolean directionChanged = false;
     private String difficulty;
     private Clip backgroundMusicClip;
-    private TitleScreen titleScreen;
 
     public GameController(ScoreModel score, String difficulty) 
     {
@@ -157,12 +152,15 @@ public class GameController
 
             if (tankView.isCollision(laserController) && !laserController.isRed) 
             {
-                lifeModel.hitByAlien(this);
+                lifeModel.hitByAlien();
                 lifeView.loseLife(lifeModel.getLives());
                 lasersToRemove.add(i);
-                if (lifeModel.isGameOver())
+                if (lifeModel.isGameOver() == true)
                 {
-                    gameOver();
+                    stopBackgroundMusic();
+                    JOptionPane.showMessageDialog(null, 
+                    "Score: " + score.getCurrentScore() +"   "+ "HighScore: " + score.getHighScore(), "Game Over", JOptionPane.DEFAULT_OPTION);
+                    gui.close();
                 }
             }
         }
@@ -251,38 +249,28 @@ public class GameController
         }
     }    
     
-    public void startGameLoop() {
+    public void startGameLoop() 
+    {
         int delay = 50;
     
-        ActionListener gameLoop = new ActionListener() {
+        ActionListener gameLoop = new ActionListener() 
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (alienArmada.getAliens().isEmpty() && !aliensRegenerating) {
+            public void actionPerformed(ActionEvent e) 
+            {
+                if (alienArmada.getAliens().isEmpty() && !aliensRegenerating) 
+                {
                     regenerateAliens();
                 }
                 moveAliens();
                 checkForCollisions();
                 moveLasers();
-    
-                if (lifeModel.isGameOver()) {
-                    stopBackgroundMusic();
-                    int result = JOptionPane.showConfirmDialog(null,
-                            "Score: " + score.getCurrentScore() + "   " + "HighScore: " + score.getHighScore() + "\nDo you want to play again?",
-                            "Game Over", JOptionPane.YES_NO_OPTION);
-    
-                    if (result == JOptionPane.YES_OPTION) {
-                        restartGame();
-                    } else {
-                        gui.close();
-                    }
-                }
             }
         };
     
         Timer timer = new Timer(delay, gameLoop);
         timer.start();
-    }
-       
+    }    
 
     public void regenerateAliens() 
     {
@@ -330,7 +318,7 @@ public class GameController
         {
             ex.printStackTrace();
         }
-    }
+    }    
     
     public void stopBackgroundMusic() 
     {
@@ -338,39 +326,8 @@ public class GameController
         {
             backgroundMusicClip.stop();
         }
-    } 
+    }    
 
-    public void restartGame() 
-    {
-        stopBackgroundMusic();
-        gui.close();
-        lifeModel.setLives(3);
-        lifeView.setLives(3);
-        score.resetScore();
-        scoreView.updateScore(score.getCurrentScore());
-        alienArmada.resetAliens();
-        TitleScreen titleScreen = new TitleScreen();
-        titleScreen.drawMainMenu();
-    }
-    
-    public void gameOver() 
-    {
-        stopBackgroundMusic();
-    
-        int result = JOptionPane.showConfirmDialog(null,
-                "Score: " + score.getCurrentScore() + "   " + "HighScore: " + score.getHighScore() + "\nDo you want to play again?",
-                "Game Over", JOptionPane.YES_NO_OPTION);
-    
-        if (result == JOptionPane.YES_OPTION) 
-        {
-            restartGame();
-        } 
-        else 
-        {
-            gui.close();
-        }
-    }
-    
     public String getDifficulty()
     {
         return this.difficulty;
@@ -379,11 +336,6 @@ public class GameController
     public SpaceGUI getSpaceGUI() 
     {
         return gui;
-    }
-
-    public ScoreModel getScoreModel()
-    {
-        return this.score;
     }
 
     public void setTankView(TankView tankView) 
