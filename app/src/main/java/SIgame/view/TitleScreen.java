@@ -2,6 +2,8 @@ package SIgame.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -37,30 +39,40 @@ public class TitleScreen implements KeyListener
         
         titleScreen.setPreferredSize(new Dimension(640, 480));
         titleScreen.setBackground(Color.BLACK);
-        titleScreen.setLayout(new BoxLayout(titleScreen, BoxLayout.PAGE_AXIS));
+        titleScreen.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+
+        titleScreen.add(image, gbc);
+
+        gbc.gridy = 1;
 
         JPanel labelPanel = new JPanel();
         labelPanel.setBackground(Color.BLACK);
         labelPanel.setLayout(new BoxLayout(labelPanel, 3));
-    
+
         JLabel label = new JLabel("Select Difficulty:");
         label.setForeground(Color.WHITE);
-        label.setFont(new Font("Arial", Font.BOLD, 24));
+        label.setFont(new Font("Monospaced", Font.BOLD, 24));
 
         normalLabel = new JLabel("[ Normal ]");
         normalLabel.setForeground(Color.WHITE);
-        normalLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        normalLabel.setFont(new Font("Monospaced", Font.PLAIN, 20));
 
         hardLabel = new JLabel("Hard");
         hardLabel.setForeground(Color.WHITE);
-        hardLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        hardLabel.setFont(new Font("Monospaced", Font.PLAIN, 20));
 
         labelPanel.add(label);
         labelPanel.add(normalLabel);
         labelPanel.add(hardLabel);
 
-        titleScreen.add(image);
-        titleScreen.add(labelPanel);
+        titleScreen.add(labelPanel, gbc);
 
         menuFrame.add(titleScreen);
         menuFrame.pack();

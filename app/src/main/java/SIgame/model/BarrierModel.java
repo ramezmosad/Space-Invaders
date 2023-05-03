@@ -6,7 +6,7 @@ public class BarrierModel
     private int y;
     private int width;
     private int height;
-    private int hitCount = 10;
+    private int hitCount;
 
     public BarrierModel(int x, int y, int width, int height) 
     {
