@@ -33,6 +33,7 @@ public class GameController
     private boolean aliensRegenerating = false;
     private boolean directionChanged = false;
     private String difficulty;
+    private Clip backgroundMusicClip;
 
     public GameController(ScoreModel score, String difficulty) 
     {
@@ -156,8 +157,9 @@ public class GameController
                 lifeView.loseLife(lifeModel.getLives());
                 System.out.println("Tank collided with laser");
                 lasersToRemove.add(i);
-                if(lifeModel.isGameOver() == true)
+                if (lifeModel.isGameOver() == true)
                 {
+                    stopBackgroundMusic();
                     JOptionPane.showMessageDialog(null, 
                     "Score: " + score.getCurrentScore() +"   "+ "HighScore: " + score.getHighScore(), "Game Over", JOptionPane.DEFAULT_OPTION);
                     gui.close();
@@ -235,6 +237,7 @@ public class GameController
     
             if (alienModel.getY() >= tankView.getY() - 40) 
             {
+                stopBackgroundMusic();
                 lifeModel.playGameOverNoise();
                 JOptionPane.showMessageDialog(null, "Game Over: Aliens have reached your tank! Score: " + score.getCurrentScore() + ", HighScore: " + score.getHighScore(), "Game Over", JOptionPane.DEFAULT_OPTION);
                 gui.close();
@@ -309,15 +312,23 @@ public class GameController
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("arcade-music-loop.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
             DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
-            Clip clip = (Clip) AudioSystem.getLine(info);
-            clip.open(audioInputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            backgroundMusicClip = (Clip) AudioSystem.getLine(info);
+            backgroundMusicClip.open(audioInputStream);
+            backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
         } 
         catch (Exception ex) 
         {
             ex.printStackTrace();
         }
     }
+    
+    public void stopBackgroundMusic() 
+    {
+        if (backgroundMusicClip != null) 
+        {
+            backgroundMusicClip.stop();
+        }
+    }    
 
     public String getDifficulty()
     {
@@ -338,5 +349,4 @@ public class GameController
     {
         this.alienArmada = alienArmada;
     }
-    
 }
