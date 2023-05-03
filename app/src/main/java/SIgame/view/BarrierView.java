@@ -16,7 +16,7 @@ public class BarrierView extends JPanel
     public BarrierView(BarrierModel barrierModel, Color color) 
     {
         this.barrierModel = barrierModel;
-        this.color = color;
+        this.color = color.darker().darker().darker();
         setBounds(barrierModel.getX(), barrierModel.getY(), barrierModel.getWidth(), barrierModel.getHeight());
         setLayout(null);
 
