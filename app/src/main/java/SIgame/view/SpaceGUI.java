@@ -22,7 +22,7 @@ public class SpaceGUI
     ScoreModel score;
     ScoreView scoreView;
     AlienArmada alienArmada;
-    String difficulty;// = "Normal"; //hard coded for now
+    String difficulty;
 
     public SpaceGUI(GameController gameController, ScoreModel score, TankView tankView, LifeView lifeView, AlienArmada alienArmada, ScoreView scoreView, String difficulty) 
     {
