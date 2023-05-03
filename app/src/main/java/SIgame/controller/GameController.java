@@ -42,8 +42,6 @@ public class GameController
 
     public GameController(ScoreModel score, String difficulty) 
     {
-        this.titleScreen = new TitleScreen();
-        this.titleScreen.drawMainMenu();
         if (difficulty.equals("Hard"))
         {
             this.alienSpeed = 3;
@@ -351,7 +349,8 @@ public class GameController
         score.resetScore();
         scoreView.updateScore(score.getCurrentScore());
         alienArmada.resetAliens();
-        GameController newGameController = new GameController(score, difficulty);
+        TitleScreen titleScreen = new TitleScreen();
+        titleScreen.drawMainMenu();
     }
     
     public void gameOver() 
