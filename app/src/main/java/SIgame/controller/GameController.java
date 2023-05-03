@@ -119,7 +119,6 @@ public class GameController
                     scoreView.updateScore(score.getCurrentScore());
                     alienArmada.removeAlien(alienController);
                     alienController.removeAlien(gui);
-                    System.out.println("Alien collided with laser");
                     lasersToRemove.add(i);
                     laserRemoved = true;
                     break;
@@ -155,7 +154,6 @@ public class GameController
             {
                 lifeModel.hitByAlien();
                 lifeView.loseLife(lifeModel.getLives());
-                System.out.println("Tank collided with laser");
                 lasersToRemove.add(i);
                 if (lifeModel.isGameOver() == true)
                 {
