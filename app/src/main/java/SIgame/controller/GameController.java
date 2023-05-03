@@ -22,7 +22,6 @@ public class GameController
     private LifeView lifeView;
     private ScoreModel score;
     private TankView tankView;
-    private TankController tankController;
     private SpaceGUI gui;
     private List<LaserModel> laserModels;
     private List<LaserView> laserViews;
@@ -249,7 +248,6 @@ public class GameController
         }
     }    
     
-
     public void startGameLoop() 
     {
         int delay = 50;

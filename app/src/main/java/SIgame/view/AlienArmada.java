@@ -63,7 +63,6 @@ public class AlienArmada
             alienBelow.enableShooting();
         }
     }
-    
 
     public void resetAliens()
     {

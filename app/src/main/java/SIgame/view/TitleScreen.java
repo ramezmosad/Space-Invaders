@@ -72,7 +72,8 @@ public class TitleScreen implements KeyListener
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) 
+    {
         if (e.getKeyCode() == KeyEvent.VK_UP)
         {
             playSelectNoise();
@@ -82,7 +83,8 @@ public class TitleScreen implements KeyListener
                 hardLabel.setText("Hard");
                 selectedButton = 0;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        } 
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
         {
             playSelectNoise();
             if (selectedButton == 0)
@@ -91,29 +93,20 @@ public class TitleScreen implements KeyListener
                 hardLabel.setText("[ Hard ]");
                 selectedButton = 1;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        } 
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
         {
             if (selectedButton == 0)
             {
                 difficulty = "Normal";
-            } else
+            } 
+            else
             {
                 difficulty = "Hard";
             }
             menuFrame.dispose();
         }
     }
-
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-    }
-
 
     public String getDifficulty()
     {
@@ -142,5 +135,13 @@ public class TitleScreen implements KeyListener
         }
     }
 
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+    }
 
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+    }
 }
