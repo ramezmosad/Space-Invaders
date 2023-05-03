@@ -35,6 +35,12 @@ public class ScoreModel implements Serializable
         return highScore;
     }
 
+    public void resetScore() 
+    {
+        this.currentScore = 0;
+    }
+    
+
     private void saveHighScoreToFile() 
     {
         try 

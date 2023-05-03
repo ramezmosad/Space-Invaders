@@ -13,6 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import SIgame.controller.GameController;
+import SIgame.model.ScoreModel;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.*;
@@ -106,18 +109,20 @@ public class TitleScreen implements KeyListener
                 selectedButton = 1;
             }
         } 
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
-        {
-            if (selectedButton == 0)
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            if (selectedButton == 0) 
             {
                 difficulty = "Normal";
             } 
-            else
+            else 
             {
                 difficulty = "Hard";
             }
             menuFrame.dispose();
+            ScoreModel scoreModel = new ScoreModel();
+            GameController gameController = new GameController(scoreModel, difficulty);
         }
+        
     }
 
     public String getDifficulty()
