@@ -25,7 +25,14 @@ public class AlienController
         this.gameController = gameController;
         this.isHit = false;
 
-        timeIntervals = new ArrayList<>(Arrays.asList(5000, 10000, 15000, 20000));
+        if (gameController.getDifficulty().equals("Normal"))
+        {
+            timeIntervals = new ArrayList<>(Arrays.asList(5000, 10000, 15000, 20000));
+        }
+        else
+        {
+            timeIntervals = new ArrayList<>(Arrays.asList(3000, 5000, 10000));
+        }
         Random random = new Random();
         int randomTimeInterval = timeIntervals.get(random.nextInt(timeIntervals.size()));
 

@@ -40,7 +40,6 @@ public class ScoreModel implements Serializable
         this.currentScore = 0;
     }
     
-
     private void saveHighScoreToFile() 
     {
         try 

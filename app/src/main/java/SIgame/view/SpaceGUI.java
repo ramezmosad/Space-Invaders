@@ -23,7 +23,6 @@ public class SpaceGUI
     ScoreView scoreView;
     AlienArmada alienArmada;
     String difficulty;
-    private boolean isRunning = true;
 
     public SpaceGUI(GameController gameController, ScoreModel score, TankView tankView, LifeView lifeView, AlienArmada alienArmada, ScoreView scoreView, String difficulty) 
     {
@@ -56,16 +55,6 @@ public class SpaceGUI
     public JPanel getGameScreen() 
     {
         return gameScreen;
-    }
-
-    public void setRunning(boolean isRunning) 
-    {
-        this.isRunning = isRunning;
-    }
-
-    public boolean isRunning() 
-    {
-        return isRunning;
     }
 
     public void drawGameScreen(String difficulty, TankView tankVieww) 
@@ -110,5 +99,5 @@ public class SpaceGUI
     public void close()
     {
         gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
-    }
+    }   
 }

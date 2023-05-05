@@ -152,6 +152,22 @@ public class TitleScreen extends JLabel implements KeyListener
         }
     }
 
+    public void showTitleScreen() 
+    {
+        if (menuFrame != null) 
+        {
+            menuFrame.setVisible(true);
+        }
+    }
+    
+    public void hideTitleScreen() 
+    {
+        if (menuFrame != null) 
+        {
+            menuFrame.setVisible(false);
+        }
+    }
+    
     @Override
     public void keyReleased(KeyEvent e)
     {
