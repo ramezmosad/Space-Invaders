@@ -26,16 +26,15 @@ public class ModelTest
     @Test
     public void testBarrierModel() 
     {
-        BarrierModel barrier = new BarrierModel(10, 20, 50, 60);
+        BarrierModel barrier = new BarrierModel(10, 20, 50, 60, 20);
 
         assertEquals(10, barrier.getX());
         assertEquals(20, barrier.getY());
         assertEquals(50, barrier.getWidth());
         assertEquals(60, barrier.getHeight());
+        assertEquals(20, barrier.getHitCount());
 
-        assertEquals(10, barrier.getHitCount());
-
-        for (int i = 0; i < 9; i++) 
+        for (int i = 0; i < 19; i++) 
         {
             assertFalse(barrier.hitByLaser());
         }
@@ -45,7 +44,7 @@ public class ModelTest
     @Test
     public void testBarrierModelNegative() 
     {
-        BarrierModel barrier = new BarrierModel(10, 20, 50, 60);
+        BarrierModel barrier = new BarrierModel(10, 20, 50, 60, 10);
     
         for (int i = 0; i < 15; i++) 
         {
