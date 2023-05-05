@@ -33,6 +33,7 @@ public class GameController
     private boolean aliensRegenerating = false;
     private boolean directionChanged = false;
     private String difficulty;
+    private BarrierModel barrierModel;
     private Clip backgroundMusicClip;
 
     public GameController(ScoreModel score, String difficulty) 
@@ -187,7 +188,14 @@ public class GameController
     
         for (int i = 0; i < numberOfBarriers; i++) 
         {
-            BarrierModel barrierModel = new BarrierModel(barrierStartX + (i * (barrierWidth + barrierSpacing)), barrierY, barrierWidth, barrierHeight);
+            if (difficulty.equals("Hard"))
+            {
+                this.barrierModel = new BarrierModel(barrierStartX + (i * (barrierWidth + barrierSpacing)), barrierY, barrierWidth, barrierHeight, 10);
+            }
+            else
+            {
+                this.barrierModel = new BarrierModel(barrierStartX + (i * (barrierWidth + barrierSpacing)), barrierY, barrierWidth, barrierHeight, 20);
+            }
             BarrierView barrierView = new BarrierView(barrierModel, Color.GREEN);
             barrierViews.add(barrierView);
             gui.addBarrierToGameScreen(barrierView);

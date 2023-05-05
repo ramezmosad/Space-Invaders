@@ -6,14 +6,15 @@ public class BarrierModel
     private int y;
     private int width;
     private int height;
-    private int hitCount = 10;
+    private int hitCount;
 
-    public BarrierModel(int x, int y, int width, int height) 
+    public BarrierModel(int x, int y, int width, int height, int hitCount) 
     {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.hitCount = hitCount;
     }
 
     public boolean hitByLaser() 
