@@ -4,10 +4,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +22,7 @@ import javax.sound.sampled.*;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
 
-public class TitleScreen implements KeyListener
+public class TitleScreen extends JLabel implements KeyListener
 {
     private JFrame menuFrame;
     private JPanel titleScreen;
@@ -33,9 +35,12 @@ public class TitleScreen implements KeyListener
     {
         titleScreen = new JPanel();
         menuFrame = new JFrame("Space Invaders");
-        ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
+        ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("space_invaders_logo.png"));
+        Image scaledLogo = logo.getImage().getScaledInstance(500, 320, Image.SCALE_DEFAULT);
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JLabel image = new JLabel(logo);
+        Icon logoIcon = new ImageIcon(scaledLogo);
+        setIcon(logoIcon);
+        JLabel image = new JLabel(logoIcon);
         
         titleScreen.setPreferredSize(new Dimension(640, 480));
         titleScreen.setBackground(Color.BLACK);

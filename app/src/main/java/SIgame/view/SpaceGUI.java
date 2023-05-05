@@ -30,7 +30,6 @@ public class SpaceGUI
         this.controller = gameController;
         this.score = score;
         this.tankView = tankView;
-        this.alienView = alienView;
         this.lifeView = lifeView;
         this.alienArmada = alienArmada;
         this.scoreView = scoreView;
